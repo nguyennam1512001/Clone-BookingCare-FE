@@ -3,13 +3,14 @@
     background: linear-gradient(135deg, rgba(34,193,195,1) 0%,rgba(253,187,45,1) 100%);
     padding-top: 100px;
     .login-container{
-        overflow: auto;
+        position: absolute;
+        margin: auto;
+        top: 0;left: 0;right: 0;bottom: 0;
         max-width: 500px;
         min-width: 300px;
-        max-height: 700px;
+        max-height: 450px;
         width: 30%;
-        height: 60%;
-        margin: 100px auto;
+        // height: auto;
         background-color: #FFFFFF;
         border-radius: 25px;
         padding: 20px;
@@ -23,6 +24,18 @@
             }
             .login-input{
                 margin: 10px 0;
+                .password-wrap{
+                    position: relative;
+                    input{
+                    }
+                    i{
+                        position: absolute;
+                        right: 8px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        cursor: pointer;
+                    }
+                }
             }
             .btn-login{
                 border-radius: 25px;
