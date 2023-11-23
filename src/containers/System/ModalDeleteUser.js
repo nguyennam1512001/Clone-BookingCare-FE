@@ -17,12 +17,12 @@ class ModalDeleteUser extends Component {
     }
 
     toggle = ()=>{
-        this.props.togglePromParent()
+        this.props.toggleFromParent()
     }
 
     deleteUserModal = async () => {
         try {
-            let res = await this.props.deleteUser(this.props.userId);
+            let res = await this.props.deleteUser(this.props.id);
             if (res && res.errCode === 0) {
             } else {
             console.log('err:', res.errMessage); // In ra thông báo lỗi để kiểm tra
@@ -49,7 +49,7 @@ class ModalDeleteUser extends Component {
                     Do you want to delete the user ?
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="danger" className='px-3' onClick={()=>this.deleteUserModal()}>Delete</Button> 
+                    <Button color="danger" className='px-3' onClick={this.deleteUserModal}>Delete</Button> 
                     <Button color="primary" className='px-3' onClick={()=>this.toggle()}>Cancel</Button>
                 </ModalFooter>
             </Modal>

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 // import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { getUsers, createNewUserSevice, deleteUserSevice } from '../../services/userSevice';
+import { getUsers, createNewUserSevice, updateUserSevice ,deleteUserSevice } from '../../services/userSevice';
 import './UserManage.scss'
 import ModalCreateUser from './ModalCreateUser';
+import ModalUpdateUser from './ModalUpdateUser';
 import ModalDeleteUser from './ModalDeleteUser';
 import ToastMessage from '../../components/ToastMessage';
 import { emitter } from '../../utils/Emitter'
@@ -15,11 +16,13 @@ class UserManage extends Component {
         this.state = {
             arrUser: [],
             isOpenModalCreateUser: false,
+            isOpenModalUpdateUser: false,
             isOpenModalDeleteUser: false,
             isOpenToast: false,
             titleToast: '',
             typeToast: '',
             toastMessage: '',
+            selectedUserData: {},
             selectedUserId: null
         };
     }    
@@ -43,6 +46,13 @@ class UserManage extends Component {
         })
     }
 
+    openModalUpdateUser(data){
+        this.setState({
+            isOpenModalUpdateUser : true,
+            selectedUserData: data,
+        })
+    }
+
     openModalDeleteUser(id){
         this.setState({
             isOpenModalDeleteUser: true,
@@ -55,6 +65,13 @@ class UserManage extends Component {
             isOpenModalCreateUser: !this.state.isOpenModalCreateUser,
         });
     }    
+
+    toggleModalUpdateUser = () =>{
+        this.setState({
+            isOpenModalUpdateUser: !this.state.isOpenModalUpdateUser,
+        });
+    }
+
     toggleModalDeleteUser = () => {
         this.setState({
             isOpenModalDeleteUser: !this.state.isOpenModalDeleteUser,
@@ -93,7 +110,22 @@ class UserManage extends Component {
             console.log(e);
         }
     }
-
+    handleUpdateUser = async(data)=>{
+        try {
+            let res = await updateUserSevice(data)
+            if (res && res.errCode !== 0) {
+                this.setState({
+                    errMessage: res.errMessage
+                })
+            } else {
+                this.showToast(res.message, 'Success', 'success')
+                await this.getAllUserFromReact()
+            }
+            return res
+        } catch (e) {
+            console.log(e);
+        }
+    }
     handleDeleteUser = async(id) =>{
         try {
             if (id) {
@@ -118,13 +150,21 @@ class UserManage extends Component {
             <div className='user-contaner'>
                 <ModalCreateUser 
                     isOpen={this.state.isOpenModalCreateUser}
-                    togglePromParent={()=> this.toggleModalCreateUser()}
+                    toggleFromParent={()=> this.toggleModalCreateUser()}
                     createNewUser={this.createNewUser}
                 />
+                {this.state.isOpenModalUpdateUser&&
+                    <ModalUpdateUser
+                        isOpen = {this.state.isOpenModalUpdateUser}
+                        toggleFromParent = {()=> this.toggleModalUpdateUser()}
+                        updateUser = {this.handleUpdateUser}
+                        user = {this.state.selectedUserData}
+                    />
+                }
                 <ModalDeleteUser
                     isOpen = {this.state.isOpenModalDeleteUser}
-                    togglePromParent={()=> this.toggleModalDeleteUser()}
-                    deleteUser={() => this.handleDeleteUser(this.state.selectedUserId)}
+                    toggleFromParent={()=> this.toggleModalDeleteUser()}
+                    deleteUser={this.handleDeleteUser}
                     id={this.state.selectedUserId}
                 />
                 
@@ -155,7 +195,10 @@ class UserManage extends Component {
                                         <td>{item.lastName}</td>
                                         <td>{item.address}</td>
                                         <td>
-                                            <button className='btn-edit'>
+                                            <button 
+                                                className='btn-edit'
+                                                onClick={()=>this.openModalUpdateUser(item)}
+                                            >
                                                 <i className="fas fa-pencil-alt"></i>
                                             </button>
                                             <button 
