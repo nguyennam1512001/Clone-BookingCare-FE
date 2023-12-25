@@ -1,4 +1,25 @@
 {
+    "home-header":{
+        "speciality":"Chuyên khoa",
+        "searchdoctor":"Tìm bác sĩ theo chuyên khoa",
+        "health-facility": "Cơ sở y tế",
+        "choose-hospital":"Chọn bênh viện phòng khám",
+        "doctor":"Bác sĩ",
+        "choose-doctor":"Chọn bác sĩ giỏi",
+        "examination-package":"Gói khám",
+        "general-check":"Khám sức khỏe tổng quát",
+        "help": "Hỗ trợ"
+    },
+    "banner":{
+        "title":"NỀN TẢNG Y TẾ",
+        "sub-title":"CHĂM SÓC SỨC KHOẺ TOÀN DIỆN",
+        "child1":"Khám chuyên khoa",
+        "child2":"Khám từ xa",
+        "child3":"Khám tổng quát",
+        "child4":"Sét nghiệm y học",
+        "child5":"Sức khỏe tinh thần",
+        "child6":"Khám nha khoa"
+    },
     "common": {
         "add": "Thêm",
         "edit": "Sửa",

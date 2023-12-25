@@ -5,6 +5,7 @@ import './HomeHeader.scss'
 import Logo from '../../assets/images/logo';
 import Icon from '@mdi/react';
 import { mdiTooth } from '@mdi/js';
+import { FormattedMessage } from 'react-intl';   // giúp chuyển đổi qua lại giữa các ngôn ngữ
 
 class HomeHeader extends Component {
     constructor(props){
@@ -32,39 +33,43 @@ class HomeHeader extends Component {
                         </div>
                         <div className='center-content'>
                             <div className='option'>
-                                <p className='title'>Chuyên khoa</p>
-                                <p className='description'>Tìm bác sĩ theo chuyên khoa</p>
+                                <p className='title'><FormattedMessage id="home-header.speciality"/></p>
+                                <p className='description'> <FormattedMessage id="home-header.searchdoctor"/></p>
                             </div>
                             <div className='option'>
-                                <p className='title'>Cơ sở y tế</p>
-                                <p className='description'>Chọn bênh viện phòng khám</p>
+                                <p className='title'> <FormattedMessage id="home-header.health-facility"/></p>
+                                <p className='description'><FormattedMessage id="home-header.choose-hospital"/></p>
                             </div>
                             <div className='option'>
-                                <p className='title'>Bác sĩ</p>
-                                <p className='description'>chọn bác sĩ giỏi</p>
+                                <p className='title'> <FormattedMessage id="home-header.doctor"/></p>
+                                <p className='description'> <FormattedMessage id="home-header.choose-doctor"/></p>
                             </div>
                             <div className='option'>
-                                <p className='title'>Gói khám</p>
-                                <p className='description'>Khám sức khoẻ tổng quát</p>
+                                <p className='title'> <FormattedMessage id="home-header.examination-package"/></p>
+                                <p className='description'> <FormattedMessage id="home-header.general-check"/></p>
                             </div>
                         </div>
                         <div className='right-content'>
-                            <a href='#'>
-                                <i className='material-icons'>help</i>
-                            </a>
-                            <span>Hỗ trợ</span>
+                            <div  className='support'>
+                                <a href='#'>
+                                    <i className='material-icons'>help</i>
+                                </a>
+                                <span> <FormattedMessage id="home-header.help"/></span>
+                            </div>
+                            <div className='language-vi'>VN</div>
+                            <div className='language-en'>EN</div>
                         </div>
                     </div>
                 </div>
                 <div className='home-header-banner'>
                     <div className='content-up'>
-                        <div className='banner-title'>NỀN TẢNG Y TẾ</div>
-                        <div className='sub-title'>CHĂM SÓC SỨC KHOẺ TOÀN DIỆN</div>
+                        <div className='banner-title'> <FormattedMessage id="banner.title"/></div>
+                        <div className='sub-title'> <FormattedMessage id="banner.sub-title"/></div>
                         <div className='search form-group'>
                             <span>
                                 <i className='material-icons'>search</i>
                             </span>
-                            <input className='input-search form-control' type='text' placeholder='Tìm gói khám'/>
+                            <input className='input-search form-control' type='text' placeholder='Seach'/>
                         </div>
                     </div>
                     <div className='content-down'>
@@ -73,38 +78,38 @@ class HomeHeader extends Component {
                                 <div className='icon'>
                                     <i className='far fa-hospital'></i>
                                 </div>
-                                <div className='text'>Khám chuyên khoa</div>
+                                <div className='text'><FormattedMessage id="banner.child1"/></div>
                             </div>
                             <div className='option-child'>
                                 <div className='icon'>
                                     <i className='material-icons'>phone_android</i>
                                 </div>
-                                <div className='text'>Khám từ xa</div>
+                                <div className='text'><FormattedMessage id="banner.child2"/></div>
                             </div>
                             <div className='option-child'>
                                 <div className='icon'>
                                     <i className='material-icons'>airline_seat_flat</i>
                                 </div>
-                                <div className='text'>Khám tổng quát</div>
+                                <div className='text'><FormattedMessage id="banner.child3"/></div>
                             </div>
                             <div className='option-child'>
                                 <div className='icon'>
                                     <i className='material-icons'>biotech</i>
                                 </div>
-                                <div className='text'>Xét nghiệm y học</div>
+                                <div className='text'> <FormattedMessage id="banner.child4"/></div>
                             </div>
                             <div className='option-child'>
                                 <div className='icon'>
                                     <i className='material-icons'>psychology</i>
                                 </div>
-                                <div className='text'>Sức khoẻ tinh thần</div>
+                                <div className='text'> <FormattedMessage id="banner.child5"/></div>
                             </div>
                             <div className='option-child'>
                                 <div className='icon'>
                                     {/* <i className='material-icons'>phone_android</i> */}
                                     <Icon path={mdiTooth} size={1} />
                                 </div>
-                                <div className='text'>Khám nha khoa</div>
+                                <div className='text'> <FormattedMessage id="banner.child6"/></div>
                             </div>
                         </div>
                     </div>

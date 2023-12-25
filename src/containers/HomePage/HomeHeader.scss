@@ -27,7 +27,7 @@
             .logo{
                 min-width: 160px;
                 max-width: 200px;
-                height: 48px;
+                height: 42px;
                 padding-top: 5px;
             }
         }
@@ -54,7 +54,7 @@
                     color: #585757;
                     overflow: hidden;
                     position: relative;
-                    line-height: 1.2em; /* Chiều cao của mỗi dòng */
+                    line-height: 1.4em; /* Chiều cao của mỗi dòng */
                     max-height: 1.4em; /* Chiều cao tối đa của hai dòng */
                     
                 }
@@ -62,20 +62,32 @@
         }
 
         .right-content{
-            height: 100%;
             display: flex;
             flex: 1;
             align-items: center;
             justify-content: end;
-            i{
-                color:#46C3D3;
+            .support{
+                margin-right: 50px;
+                display: flex;
+                align-items: center;
+                i{
+                    color:#46C3D3;
+                }
+            }
+            .language-vi{
+                cursor: pointer;
+                color: #46C3D3;
+            }
+            .language-en{
+                margin: 0 10px;
+                cursor: pointer;
             }
         }
     }
 }
 
 .home-header-banner {
-    background: url('../../assets/images/header-background.png') center no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.1)), url('../../assets/images/header-background.png') center no-repeat;
     background-size: cover;
     height: 485px;
     text-align: center;
@@ -121,6 +133,7 @@
         display: flex;
         align-items: end;
         justify-content: center;
+        background-image: linear-gradient(rgba(255,255,255,0.1),rgba(255,255,255, 0.9),rgba(255,255,255, 1) );
         .options{
             display: flex;
             margin-bottom: 20px;
@@ -144,7 +157,7 @@
                     }
                 }
                 .text{
-                    font-size: 16px;
+                    font-size: 15px;
                     
                 }
             }
