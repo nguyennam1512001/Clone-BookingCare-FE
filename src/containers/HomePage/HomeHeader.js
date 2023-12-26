@@ -7,6 +7,8 @@ import Icon from '@mdi/react';
 import { mdiTooth } from '@mdi/js';
 import { FormattedMessage } from 'react-intl';   // giúp chuyển đổi qua lại giữa các ngôn ngữ
 
+import { LANGUAGES } from '../../utils/constant';
+import { changeLanguageApp } from '../../store/actions';
 class HomeHeader extends Component {
     constructor(props){
         super(props)
@@ -18,7 +20,12 @@ class HomeHeader extends Component {
 
     }
 
+    changeLanguage = (language) =>{
+       this.props.changeLanguageAppRedux(language)
+    }
+
     render() {
+        let language = this.props.language
         return (
             <div>
                 <div className='home-header-container'>
@@ -56,8 +63,8 @@ class HomeHeader extends Component {
                                 </a>
                                 <span> <FormattedMessage id="home-header.help"/></span>
                             </div>
-                            <div className='language-vi'>VN</div>
-                            <div className='language-en'>EN</div>
+                            <div className={language === LANGUAGES.VI ? 'language-vi active': 'language-vi'}><span onClick={()=> this.changeLanguage(LANGUAGES.VI)}>VN</span></div>
+                            <div className={language === LANGUAGES.EN ? 'language-en active': 'language-en'}><span onClick={()=> this.changeLanguage(LANGUAGES.EN)}>EN</span></div>
                         </div>
                     </div>
                 </div>
@@ -69,7 +76,7 @@ class HomeHeader extends Component {
                             <span>
                                 <i className='material-icons'>search</i>
                             </span>
-                            <input className='input-search form-control' type='text' placeholder='Seach'/>
+                            <input className='input-search form-control' type='text' placeholder='Search'/>
                         </div>
                     </div>
                     <div className='content-down'>
@@ -123,12 +130,14 @@ class HomeHeader extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        language: state.app.language
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
     };
 };
 
