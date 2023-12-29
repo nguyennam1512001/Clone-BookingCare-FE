@@ -13,3 +13,7 @@ export const changeLanguageApp = (languageInput) => ({
     type: actionTypes.CHANGE_LANGUAGE,
     language: languageInput
 })
+
+export const incrementNumber = ()=>({
+    type: actionTypes.INCREMENT_NUMBER,
+})

@@ -10,6 +10,7 @@ const initContentOfConfirmModal = {
 const initialState = {
     started: true,
     language: 'vi',
+    number: 1,
     systemMenuPath: '/system/user-manage',
     contentOfConfirmModal: {
         ...initContentOfConfirmModal
@@ -35,6 +36,11 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...state,
                 language: action.language
+            }
+        case actionTypes.INCREMENT_NUMBER:
+            return {
+                ...state,
+                number: state.number + 1
             }
         default:
             return state;

@@ -8,7 +8,7 @@ import { mdiTooth } from '@mdi/js';
 import { FormattedMessage } from 'react-intl';   // giúp chuyển đổi qua lại giữa các ngôn ngữ
 
 import { LANGUAGES } from '../../utils/constant';
-import { changeLanguageApp } from '../../store/actions';
+import { changeLanguageApp, incrementNumber } from '../../store/actions';
 class HomeHeader extends Component {
     constructor(props){
         super(props)
@@ -24,8 +24,12 @@ class HomeHeader extends Component {
        this.props.changeLanguageAppRedux(language)
     }
 
+    handleIncrement = ()=>{
+        this.props.incrementNumberRedux()
+    }
     render() {
         let language = this.props.language
+        let number = this.props.number
         return (
             <div>
                 <div className='home-header-container'>
@@ -65,6 +69,8 @@ class HomeHeader extends Component {
                             </div>
                             <div className={language === LANGUAGES.VI ? 'language-vi active': 'language-vi'}><span onClick={()=> this.changeLanguage(LANGUAGES.VI)}>VN</span></div>
                             <div className={language === LANGUAGES.EN ? 'language-en active': 'language-en'}><span onClick={()=> this.changeLanguage(LANGUAGES.EN)}>EN</span></div>
+                            <p onClick={this.handleIncrement}>+++++</p>
+                            <p>{number}</p>
                         </div>
                     </div>
                 </div>
@@ -131,13 +137,15 @@ class HomeHeader extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
-        language: state.app.language
+        language: state.app.language,
+        number: state.app.number
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
+        incrementNumberRedux: ()=> dispatch(incrementNumber())
     };
 };
 

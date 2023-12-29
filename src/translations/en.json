@@ -1,12 +1,12 @@
 {
     "home-header": {
-        "speciality": "Specialty",
+        "speciality": "Specialties",
         "searchdoctor": "Find doctors by specialty",
-        "health-facility": "Health Facility",
+        "health-facility": "Medical facility",
         "choose-hospital": "Choose a hospital or clinic",
         "doctor": "Doctor",
         "choose-doctor": "Choose a qualified doctor",
-        "examination-package": "Examination Package",
+        "examination-package": "Check-up Package",
         "general-check": "General Health Check",
         "help": "Support"
     },
@@ -19,6 +19,11 @@
         "child4": "Medical Tests",
         "child5": "Mental Health",
         "child6": "Dental Examination"
+    },
+    "specialty":{
+        "specialty": "Specialist",
+        "musculoskeletal": "Musculoskeletal",
+        "acupuncture": "Acupuncture"
     },
     "common": {
         "add": "Add",
@@ -38,7 +43,8 @@
         "forbiden-request": "Invalid input data",
         "fail-to-load-all-code": "Fail to load data from allcode",
         "sum": "Sum",
-        "date-range-invalid": "Date range invalid"
+        "date-range-invalid": "Date range invalid",
+        "see-more": "See more"
     },
     "login": {
         "login": "Login",

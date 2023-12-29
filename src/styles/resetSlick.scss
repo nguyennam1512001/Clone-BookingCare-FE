@@ -1,0 +1,37 @@
+
+.slick-prev, .slick-next{
+    border: 1px solid #b5e7ed !important;
+    box-shadow: rgb(201, 236, 240) 2px 2px 5px;
+    border-radius: 8px;
+    z-index: 10;
+    width: 40px !important;
+    height: 40px !important;
+    background: #fff !important;
+    cursor: pointer;
+    &:hover{
+        background-color: #eaeaea !important;
+    }
+    &::before{
+        font-family: Material Icons !important;
+        color: #35929E !important;
+        font-size: 30px !important;
+    }
+}
+
+.slick-prev{
+    left: -10px !important;
+    &::before{
+        content: "\e314" !important;
+    }
+}
+
+.slick-next{
+    right: -10px !important;
+    &::before{
+        content: "\e315" !important;
+    }
+}
+
+.slick-slide{
+    padding: 0 10px;
+}
