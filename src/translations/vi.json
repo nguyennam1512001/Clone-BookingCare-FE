@@ -23,8 +23,46 @@
     "specialty":{
         "specialist":"Chuyên khoa phổ biến",
         "musculoskeletal": "Cơ xương khớp",
-        "acupuncture": "Châm cứu"
-
+        "nerve": "Thần kinh",
+        "digestion":"Tiêu hoá",
+        "heart":"Tim mạch",
+        "ear-nose-throat":"Tai Mũi Họng",
+        "spine":"Cột sống",
+        "traditional-medicine":"Y học Cổ truyền"
+    },
+    "healthFacility":{
+        "healthFacility":"Cơ sở y tế",
+        "viet-duc":"Bệnh viện Hữu nghị Việt Đức",
+        "cho-ray":"Bệnh viện Chợ Rẫy",
+        "doctor-check":"Doctor Check - Tầm Soát Bệnh Để Sống Thọ Hơn",
+        "dai-hoc-y":"Phòng khám Bệnh viện Đại học Y Dược 1",
+        "108":"Trung tâm Khám sức khỏe định kỳ, Bệnh viện Trung ương Quân đội 108",
+        "hung-viet":"Bệnh viện Ung bướu Hưng Việt",
+        "MEDLATEC":"Hệ thống y tế MEDLATEC"
+    },
+    "outstandingDoctor":{
+        "title":"Bác sĩ nổi bật",
+        "doctor1":"Phó Giáo sư, Tiến sĩ, Bác sĩ cao cấp Nguyễn Duy Hưng",
+        "supDoctor1":"Da liễu",
+        "doctor2":"Bác sĩ Chuyên khoa II Trần Minh Khuyên",
+        "supDoctor2":"Sức khỏe tâm thần,Tư vấn, trị liệu Tâm lý",
+        "doctor3":"Bác sĩ Chuyên khoa I Nguyễn Trọng Tuân",
+        "supDoctor3":"Sức khỏe tâm thần",
+        "doctor4":"Thạc sĩ Bác sĩ Nguyễn Thi Phú",
+        "supDoctor4":"Sức khỏe tâm thần"
+    },
+    "handBook":{
+        "handBook": "Cẩm nang",
+        "description1":"Giải đáp: Tỷ lệ thành công của IVF hiện nay",
+        "description2":"Có nên khám tại Nha khoa Ngân Phượng không? Dịch vụ thế mạnh?",
+        "description3":"Các phương pháp phục hồi chức năng liệt nửa nguời",
+        "description4":"Review chi tiết Phòng khám sản phụ khoa Ngọc Lan",
+        "description5":"",
+        "description6":"",
+        "description7":""
+    },
+    "about":{
+        "title":"Truyền thông nói về BookingCare"
     },
     "common": {
         "add": "Thêm",

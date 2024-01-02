@@ -21,9 +21,48 @@
         "child6": "Dental Examination"
     },
     "specialty":{
-        "specialty": "Specialist",
+        "specialist": "Specialist",
         "musculoskeletal": "Musculoskeletal",
-        "acupuncture": "Acupuncture"
+        "nerve": "Nerve",
+        "digestion":"Digestion",
+        "heart":"Heart",
+        "ear-nose-throat":"Ear, nose and throat",
+        "spine":"Spine",
+        "traditional-medicine":"Traditional medicine"
+    },
+    "healthFacility":{
+        "healthFacility":"Health facilities",
+        "viet-duc":"Viet Duc Friendship Hospital",
+        "cho-ray":"Cho Ray Hospital",
+        "doctor-check":"Doctor Check - Screening for Diseases to Live Longer",
+        "dai-hoc-y":"Clinic of University of Medicine and Pharmacy Hospital 1",
+        "108":"Center for Periodic Health Examination, 108 Central Military Hospital",
+        "hung-viet":"Hung Viet Oncology Hospital",
+        "MEDLATEC":"MEDLATEC medical system"
+    },
+    "outstandingDoctor":{
+        "title":"Outstanding Doctor",
+        "doctor1":"Associate Professor, Doctor, Senior Doctor Nguyen Duy Hung",
+        "supDoctor1":"Dermatology",
+        "doctor2":"Specialist II Doctor Tran Minh Khuyen",
+        "supDoctor2":"Mental health, Counseling, Psychotherapy",
+        "doctor3":"Specialist Doctor I Nguyen Trong Tuan",
+        "supDoctor3":"Mental health",
+        "doctor4":"Master Doctor Nguyen Thi Phu",
+        "supDoctor4":"Mental health"
+    },
+    "handBook":{
+        "handBook": "Handbook",
+        "description1":"Answer: Current IVF success rate",
+        "description2":"Should I be examined at Ngan Phuong Dental Clinic? Service strengths? Expense?",
+        "description3":"Methods of rehabilitation of hemiplegia due to stroke",
+        "description4":"Detailed review of Ngoc Lan Obstetrics and Gynecology Clinic",
+        "description5":"",
+        "description6":"",
+        "description7":""
+    },
+    "about":{
+        "title":"Media talks about BookingCare"
     },
     "common": {
         "add": "Add",

@@ -1,0 +1,16 @@
+
+    .section_handBook{
+        padding-bottom: 30px;
+        padding-top: 20px;
+    }
+    
+    .title{
+        text-align: start !important;
+        overflow: hidden!important;
+        display: -webkit-box!important;
+        line-height: 1.5!important;
+        -webkit-box-orient: vertical!important;
+        -webkit-line-clamp: 2!important;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }

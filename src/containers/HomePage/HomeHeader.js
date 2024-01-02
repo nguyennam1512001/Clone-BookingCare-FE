@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import './HomeHeader.scss'
-import Logo from '../../assets/images/logo';
 import Icon from '@mdi/react';
 import { mdiTooth } from '@mdi/js';
 import { FormattedMessage } from 'react-intl';   // giúp chuyển đổi qua lại giữa các ngôn ngữ
+import './HomeHeader.scss'
 
+import Logo from '../../assets/images/logo';
 import { LANGUAGES } from '../../utils/constant';
 import { changeLanguageApp, incrementNumber } from '../../store/actions';
 class HomeHeader extends Component {

@@ -1,103 +1,128 @@
+$header-height: 60px;
 
-.home-header-container{
-    width: 100%;
-    height: 60px;
-    border-bottom: 1px solid gray;
-    display: flex;
-    align-items: center;
-    .home-header-content{
-        height: 80%;
-        width: 90%;
-        margin: 0 auto;
-        display: flex;
+.home-header-container {
+    width           : 100%;
+    height          : $header-height;
+    border-bottom   : 1px solid gray;
+    display         : flex;
+    align-items     : center;
+    position        : fixed;
+    top             : 0;
+    background-color: rgb(237, 255, 250);
+    z-index         : 100;
+
+    .home-header-content {
+        height         : 80%;
+        width          : 90%;
+        margin         : 0 auto;
+        display        : flex;
         justify-content: center;
-        .left-content{
-            height: 100%;
+
+        .left-content {
+            height : 100%;
             display: flex;
-            flex: 1;
-            .menu-icon{
-                display: flex;
-                align-items: center;
+            flex   : 1;
+
+            .menu-icon {
+                display     : flex;
+                align-items : center;
                 margin-right: 10px;
-                cursor: pointer;
-                i{
+                cursor      : pointer;
+
+                i {
                     font-size: 30px;
                 }
             }
-            .logo{
-                min-width: 160px;
-                max-width: 200px;
-                height: 42px;
+
+            .logo {
+                min-width  : 160px;
+                max-width  : 200px;
+                height     : 42px;
                 padding-top: 5px;
             }
         }
 
-        .center-content{
-            height: 100%;
-            display: flex;
-            flex: 2;
-            align-items: center;
+        .center-content {
+            height         : 100%;
+            display        : flex;
+            flex           : 2;
+            align-items    : center;
             justify-content: space-between;
 
-            .option{
+            .option {
                 padding: 0 10px;
-                p{
+
+                p {
                     margin: 0;
                 }
-                .title{
-                    font-size: 12px;
-                    color: black;
+
+                .title {
+                    font-size : 12px;
+                    color     : black;
                     text-align: left;
                 }
-                .description{
-                    font-size: 12px;
-                    color: #585757;
-                    overflow: hidden;
-                    position: relative;
-                    line-height: 1.4em; /* Chiều cao của mỗi dòng */
-                    max-height: 1.4em; /* Chiều cao tối đa của hai dòng */
-                    
+
+                .description {
+                    font-size  : 12px;
+                    color      : #585757;
+                    overflow   : hidden;
+                    position   : relative;
+                    line-height: 1.4em;
+                    /* Chiều cao của mỗi dòng */
+                    max-height : 1.4em;
+                    /* Chiều cao tối đa của hai dòng */
+
                 }
             }
         }
 
-        .right-content{
-            display: flex;
-            flex: 1;
-            align-items: center;
+        .right-content {
+            display        : flex;
+            flex           : 1;
+            align-items    : center;
             justify-content: end;
-            .support{
+
+            .support {
                 margin-right: 50px;
-                display: flex;
-                align-items: center;
-                i{
-                    color:#46C3D3;
+                display     : flex;
+                align-items : center;
+
+                i {
+                    color: #46C3D3;
                 }
             }
-            .language-vi{
-                cursor: pointer;
+
+            .language-vi {
+                cursor : pointer;
                 opacity: 0.4;
-                &.active{
+
+                &.active {
                     opacity: 1;
-                    span{
+
+                    span {
                         color: #46C3D3;
                     }
                 }
-                &:hover{
+
+                &:hover {
                     opacity: 1;
                 }
             }
-            .language-en{
-                margin: 0 10px;
-                cursor: pointer;
+
+            .language-en {
+                margin : 0 10px;
+                cursor : pointer;
                 opacity: 0.4;
-                &.active{
+
+                &.active {
                     opacity: 1;
-                    span{
-                        color:#46C3D3
+
+                    span {
+                        color: #46C3D3
                     }
                 }
-                &:hover{
+
+                &:hover {
                     opacity: 1;
                 }
             }
@@ -106,78 +131,93 @@
 }
 
 .home-header-banner {
-    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.1)), url('../../assets/images/header-background.png') center no-repeat;
+    background     : linear-gradient(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0.1)), url('../../assets/images/header-background.png') center no-repeat;
     background-size: cover;
-    height: 485px;
-    text-align: center;
-    .content-up{
+    height         : 485px;
+    text-align     : center;
+    margin-top     : $header-height;
+
+    .content-up {
         height: 50%;
-        .banner-title{
-            color: white;
-            font-size: 2rem;
-            padding: 36px 0 10px;
+
+        .banner-title {
+            color      : white;
+            font-size  : 2rem;
+            padding    : 36px 0 10px;
             font-weight: 100;
             text-shadow: 1px 1px 1px #333;
         }
-        .sub-title{
-            color: white;
-            font-size: 2rem;
-            padding: 0 0 20px;
+
+        .sub-title {
+            color      : white;
+            font-size  : 2rem;
+            padding    : 0 0 20px;
             text-shadow: 1px 1px 1px #333;
         }
-        .search{
+
+        .search {
             position: relative;
-            width: 40%;
-            margin: 0 auto;
-            span{
-                i{
-                    position: absolute;
-                    top: 50%;
-                    left: 10px;
+            width   : 40%;
+            margin  : 0 auto;
+
+            span {
+                i {
+                    position : absolute;
+                    top      : 50%;
+                    left     : 10px;
                     font-size: 20px;
                     transform: translateY(-50%);
-                    cursor: pointer;
+                    cursor   : pointer;
                 }
             }
-            input{
-                height: 46px;
-                border-radius: 50px;
-                padding-left: 40px;
+
+            input {
+                height          : 46px;
+                border-radius   : 50px;
+                padding-left    : 40px;
                 background-color: #FADC01;
             }
         }
     }
-    .content-down{
-        height: 50%;
-        display: flex;
-        align-items: end;
-        justify-content: center;
-        background-image: linear-gradient(rgba(255,255,255,0.1),rgba(255,255,255, 0.9),rgba(255,255,255, 1) );
-        .options{
-            display: flex;
-            margin-bottom: 20px;
-            width: 80%;
+
+    .content-down {
+        height          : 50%;
+        display         : flex;
+        align-items     : end;
+        justify-content : center;
+        background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 1));
+
+        .options {
+            display        : flex;
+            margin-bottom  : 20px;
+            width          : 80%;
             justify-content: space-between;
-            .option-child{
-                width: 100px;
+
+            .option-child {
+                width : 100px;
                 cursor: pointer;
-                &:hover{
+
+                &:hover {
                     color: #49BCE2;
                 }
-                .icon{
-                    width: 50px;height: 50px;
-                    border-radius: 50%;
-                    text-align: center;
-                    margin: 0 auto;
+
+                .icon {
+                    width           : 50px;
+                    height          : 50px;
+                    border-radius   : 50%;
+                    text-align      : center;
+                    margin          : 0 auto;
                     background-color: white;
-                    padding: 10px;
-                    i{
+                    padding         : 10px;
+
+                    i {
                         font-size: 30px;
                     }
                 }
-                .text{
+
+                .text {
                     font-size: 15px;
-                    
+
                 }
             }
         }
@@ -186,45 +226,38 @@
 
 /* Thêm Media Query cho các kích thước màn hình nhỏ hơn 768px */
 @media (max-width: 767px) {
-    .home-header-container{
+    .home-header-container {
 
-        .home-header-content{
-            width: 100%;
+        .home-header-content {
+            width  : 100%;
             padding: 0 4px;
-            .left-content{
-                
-                .menu-icon{
-                    
-                    i{
 
-                    }
+            .left-content {
+
+                .menu-icon {
+
+                    i {}
                 }
-                .logo{
-                    
-                }
+
+                .logo {}
             }
-    
-            .center-content{
+
+            .center-content {
                 display: none;
-                .option{
 
-                    p{
+                .option {
 
-                    }
-                    .title{
-                        
-                    }
-                    .description{
-                        
-                    }
+                    p {}
+
+                    .title {}
+
+                    .description {}
                 }
             }
-    
-            .right-content{
-                
-                i{
 
-                }
+            .right-content {
+
+                i {}
             }
         }
     }
@@ -232,46 +265,39 @@
 
 /* Thêm Media Query cho các kích thước màn hình từ 769px đến 1024px (tablet) */
 @media (min-width: 768px) and (max-width: 1024px) {
-    .home-header-container{
+    .home-header-container {
 
-        .home-header-content{
-            width: 100%;
+        .home-header-content {
+            width  : 100%;
             padding: 0 4px;
-            .left-content{
+
+            .left-content {
                 flex: 3;
-                
-                .menu-icon{
-                    
-                    i{
 
-                    }
+                .menu-icon {
+
+                    i {}
                 }
-                .logo{
-                    
-                }
+
+                .logo {}
             }
-    
-            .center-content{
+
+            .center-content {
                 flex: 5;
-                .option{
 
-                    p{
+                .option {
 
-                    }
-                    .title{
-                        
-                    }
-                    .description{
-                        
-                    }
+                    p {}
+
+                    .title {}
+
+                    .description {}
                 }
             }
-    
-            .right-content{
-                
-                i{
 
-                }
+            .right-content {
+
+                i {}
             }
         }
     }
