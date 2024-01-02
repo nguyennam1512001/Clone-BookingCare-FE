@@ -172,8 +172,8 @@ class UserManage extends Component {
                 <ToastMessage title={this.state.titleToast} message={this.state.toastMessage} type={this.state.typeToast} duration={2000} />
                 }
                 <div className="title text-center">Manage users</div>
-                <div className='mx-3' onClick={()=>this.handleAddNewUser()}>
-                    <button className='add-new-user btn btn-primary px-3'><i className="fas fa-plus"></i> Add new user</button>
+                <div className='mx-3' >
+                    <button onClick={()=>this.handleAddNewUser()} className='add-new-user btn btn-primary px-3'><i className="fas fa-plus"></i> Add new user</button>
                 </div>
                 <div className='user-table mt-4 mx-3'>
                     <table id="customers">
