@@ -8,7 +8,8 @@
         "choose-doctor": "Choose a qualified doctor",
         "examination-package": "Check-up Package",
         "general-check": "General Health Check",
-        "help": "Support"
+        "help": "Support",
+        "welcome": "Welcome, "
     },
     "banner":{
         "title": "MEDICAL FOUNDATION",
@@ -103,6 +104,19 @@
             "system-parameter": {
                 "header": "System-parameter"
             }
+        },
+        "admin":{
+            "manage-user":"User",
+            "manage-doctor":"Doctor management",
+            "manage-admin":"Admin management",
+            "crud": "CRUD user",
+            "crud-redux": "CRUD redux",
+            "clinic": "Clinic",
+            "manage-clinic":"Clinic management",
+            "specialty":"specialty",
+            "manage-specialty": "specialty management",
+            "handbook":"Handbook",
+            "manage-handbook": "Handbook management"
         }
     },
     "system": {

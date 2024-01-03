@@ -10,6 +10,9 @@
     position: relative;
     
     .languages{
+        .welcome{
+            margin-right: 10px;
+        }
         .language-vi,.language-en{
             cursor: pointer;
             &.active{
