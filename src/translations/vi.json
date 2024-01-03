@@ -119,6 +119,20 @@
             "manage-handbook": "Quản lý cẩm nang"
         }
     },
+    "manage-user":{
+        "add":"Thêm mới người dùng",
+        "email":"Email",
+        "password":"Mật khẩu",
+        "firstName":"Tên",
+        "lastName":"Họ",
+        "mobile": "Số điện thoại",
+        "address":"Địa chỉ",
+        "gender":"Giới tính",
+        "position":"Chức danh",
+        "role": "Vai trò",
+        "image": "Ảnh đại diện",
+        "save":"Lưu user"
+    },
     "system": {
         "user-manage": {
             "fail-to-load-fouser": "Không thể tải về danh sách người dùng",

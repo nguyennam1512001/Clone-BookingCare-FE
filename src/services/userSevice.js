@@ -20,4 +20,8 @@ const deleteUserSevice = (id)=>{
     return axios.delete(`/api/delete-user/${id}`)
 }
 
-export {handleLoginAPI, getUsers, createNewUserSevice,updateUserSevice, deleteUserSevice}
+const getAllCodeSevice = (type)=>{
+    return axios.get(`/api/allcode?type=${type}`)
+}
+
+export {handleLoginAPI, getUsers, createNewUserSevice,updateUserSevice, deleteUserSevice, getAllCodeSevice}
