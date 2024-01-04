@@ -6,6 +6,8 @@ import clsx from 'clsx'
 import { getAllCodeSevice } from '../../../services/userSevice';
 import { LANGUAGES } from '../../../utils/constant';
 import styleUserRedux from './UserRedux.module.scss'
+import * as actions from '../../../store/actions'
+
 class UserRedux extends Component {
 
     constructor(props){
@@ -18,39 +20,25 @@ class UserRedux extends Component {
     }
 
     async componentDidMount() {
-        try {
-            let res = await getAllCodeSevice('gender')
-            if(res && res.errCode === 0){
-                this.setState({
-                    genderArr: res.data
-                })
-            }
-        } catch (e) {
-            console.log(e);
-        }
+        this.props.getGenderStart()
+        this.props.getPositionStart()
+        this.props.getRoleStart()
+    }
 
-        try {
-            let res = await getAllCodeSevice('position')
-            if(res && res.errCode === 0 ){
-                this.setState({
-                    positionArr: res.data
-                })
-            }
-        } catch (e) {
-            console.log(e);
-        }
-
-        try {
-            let res =  await getAllCodeSevice('role')
-            if(res && res.errCode === 0){
-                this.setState({
-                    roleArr: res.data
-                })
-            }
-        } catch (e) {
-            console.log(e);
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (
+            prevProps.genderRedux !== this.props.genderRedux ||
+            prevProps.positionRedux !== this.props.positionRedux ||
+            prevProps.roleRedux !== this.props.roleRedux
+        ) {
+            this.setState({
+                genderArr: this.props.genderRedux,
+                positionArr: this.props.positionRedux,
+                roleArr: this.props.roleRedux
+            });
         }
     }
+    
 
 
     render() {
@@ -149,12 +137,18 @@ class UserRedux extends Component {
 
 const mapStateToProps = state => {
     return {
-        language: state.app.language
+        language: state.app.language,
+        genderRedux: state.admin.genders,
+        positionRedux: state.admin.positions,
+        roleRedux: state.admin.roles,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        getGenderStart: () => dispatch(actions.fetchGenderStart()),
+        getPositionStart: () => dispatch(actions.fetchPositionStart()),
+        getRoleStart: () => dispatch(actions.fetchRoleStart()),
     };
 };
 
