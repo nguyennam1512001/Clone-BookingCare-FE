@@ -1,6 +1,7 @@
 import actionTypes from "../actions/actionTypes";
 
 const initialState = {
+    isLoadingGender : false,
     genders: [],
     positions: [],
     roles: []
@@ -8,14 +9,21 @@ const initialState = {
 
 const adminReducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.FETCH_GENDER_START:
+            return {
+                ...state,
+                isLoadingGender: true
+            };
         case actionTypes.FETCH_GENDER_SUCCESS:
             return {
                 ...state,
                 genders: action.data,
+                isLoadingGender: false
             };
         case actionTypes.FETCH_GENDER_FAIL:
             return {
                 ...state,
+                isLoadingGender: false
             };
         case actionTypes.FETCH_POSITION_SUCCESS:
             return {
@@ -36,7 +44,6 @@ const adminReducer = (state = initialState, action) => {
                 ...state,
             };
         default:
-            console.log(state);
             return state;
     }
 };

@@ -131,6 +131,7 @@
         "position":"Chức danh",
         "role": "Vai trò",
         "image": "Ảnh đại diện",
+        "upload-file":"Tải ảnh",
         "save":"Lưu user"
     },
     "system": {

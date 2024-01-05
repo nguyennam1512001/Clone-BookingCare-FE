@@ -4,6 +4,7 @@ import { getAllCodeSevice } from "../../services/userSevice";
 const fetchCodeStart = (codeType, successAction, failAction) => {
   return async (dispatch) => {
     try {
+        dispatch({type: actionTypes.FETCH_GENDER_START})
       let res = await getAllCodeSevice(codeType);
       if (res && res.errCode === 0) {
         dispatch(successAction(res.data));

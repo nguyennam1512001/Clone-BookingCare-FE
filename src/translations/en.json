@@ -131,6 +131,7 @@
         "position":"Position",
         "role": "Role",
         "image": "Avatar",
+        "upload-file":"Upload file",
         "save":"Save user"
     },
     "system": {
