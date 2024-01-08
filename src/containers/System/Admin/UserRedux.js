@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 import clsx from 'clsx'
 
 import { LANGUAGES } from '../../../utils/constant';
+import Toast from '../../../components/ToastMessage';
 import styleUserRedux from './UserRedux.module.scss'
 import * as actions from '../../../store/actions'
 
-import Lightbox from 'react-image-lightbox';
-import 'react-image-lightbox/style.css'; // This only needs to be imported once in your app
+
 
 
 class UserRedux extends Component {
@@ -43,6 +45,8 @@ class UserRedux extends Component {
                 address: '',
             },
 
+            // createUserFail: props.createUserFail,
+            // createUserSuccess: props.createUserSuccess,
         }
     }
 
@@ -71,6 +75,15 @@ class UserRedux extends Component {
                 roleId: roleRedux && roleRedux.length > 0 ? roleRedux[0].key : '',
             });
         }
+
+        if (prevProps.createUserFail !== this.props.createUserFail) {
+            this.setState({ createUserFail: this.props.createUserFail });
+        }
+
+        if(prevProps.createUserSuccess !== this.props.createUserSuccess){
+            this.setState({ createUserSuccess: this.props.createUserSuccess });
+        }
+        
     }
     
 
@@ -123,7 +136,7 @@ class UserRedux extends Component {
     handleSaveUser= async ()=>{
         let isvalid = this.checkValidateInput()
         if(isvalid === false) return
-        this.props.createNewUser({
+        await this.props.createNewUser({
             email: this.state.email,
             password: this.state.password,
             firstName: this.state.firstName,
@@ -136,10 +149,21 @@ class UserRedux extends Component {
         })
     }
 
+    showToast = (title, message, type, duration) => {
+        return (
+          <Toast
+            title= {title}
+            message={message}
+            type={type}
+            duration={duration}
+          />
+        );
+    };
+    // nam@gmail.com
 
     render() {
         let { previewImageUrl, email, password ,firstName ,lastName, 
-            phoneNumber, address, gender, positionId, roleId, avatar  
+            phoneNumber, address  
         } = this.state;
         let genders = this.state.genderArr
         let positions = this.state.positionArr
@@ -149,6 +173,9 @@ class UserRedux extends Component {
         return (
             <div className={clsx(styleUserRedux.user_redux_container)}>
                 <div className='title'>Manage products redux</div>
+                {this.props.createUserSuccess !== '' && this.showToast('Success', this.state.createUserSuccess, 'success', 3000)}
+                {this.props.createUserFail !=='' && this.showToast('Error', this.state.createUserFail, 'error', 3000)}
+
                 <div className={clsx(styleUserRedux.user_redux_body)}>
                     {isLoadingGender && <div className='loading_bar'></div>}
                     <div className='container'>
@@ -300,12 +327,15 @@ class UserRedux extends Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state.admin.createUserFail);
     return {
         language: state.app.language,
         genderRedux: state.admin.genders,
         positionRedux: state.admin.positions,
         roleRedux: state.admin.roles,
-        isLoadingGender: state.admin.isLoadingGender
+        isLoadingGender: state.admin.isLoadingGender,
+        createUserSuccess: state.admin.createUserSuccess,
+        createUserFail: state.admin.createUserFail,
     };
 };
 

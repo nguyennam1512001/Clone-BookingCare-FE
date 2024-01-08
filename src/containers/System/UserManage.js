@@ -169,7 +169,7 @@ class UserManage extends Component {
                 />
                 
                 {this.state.isOpenToast && 
-                <ToastMessage title={this.state.titleToast} message={this.state.toastMessage} type={this.state.typeToast} duration={2000} />
+                    <ToastMessage title={this.state.titleToast} message={this.state.toastMessage} type={this.state.typeToast} duration={2000} />
                 }
                 <div className="title text-center">Manage users</div>
                 <div className='mx-3' >

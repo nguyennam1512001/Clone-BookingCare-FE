@@ -53,21 +53,32 @@ export const createNewUser = (data)=>{
     try {
       // dispatch({type: actionTypes.CREATE_USER_SUCCESS})
       let res = await createNewUserSevice(data)
-      console.log(res);
       if(res && res.errCode === 0){
-        dispatch(saveUserSuccess())
+        dispatch(saveUserSuccess(res.message))
       }else{
-        dispatch(saveUserFail())
+        dispatch(saveUserFail(res.errMessage))
       }
     } catch (e) {
-      dispatch(saveUserFail())
+      dispatch(saveUserFail(e.message))
       console.log(e);
     }
   }
 }
-export const saveUserSuccess =()=>({
-  type: 'CREATE_USER_SUCCESS'
+export const saveUserSuccess =(message)=>({
+  type: actionTypes.CREATE_USER_SUCCESS,
+  data: message
 })
-export const saveUserFail =()=>({
-  type: 'CREATE_USER_FAIL'
+export const saveUserFail =(errMessage)=>({
+  type: actionTypes.CREATE_USER_FAIL,
+  data: errMessage
+})
+
+export const resetCreateUserSuccess = () =>({
+  type: actionTypes.CREATE_USER_SUCCESS,
+  data: ''
+})
+
+export const resetCreateUserFail = () =>({
+  type: actionTypes.CREATE_USER_FAIL,
+  data: ''
 })
