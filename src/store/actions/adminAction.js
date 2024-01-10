@@ -1,5 +1,6 @@
 import actionTypes from "./actionTypes";
-import { createNewUserSevice, getAllCodeSevice } from "../../services/userSevice";
+import { toast } from 'react-toastify';
+import { createNewUserSevice, getAllCodeSevice, getUsers, deleteUserSevice, updateUserSevice } from "../../services/userSevice";
 
 
 // get allcode
@@ -54,7 +55,9 @@ export const createNewUser = (data)=>{
       // dispatch({type: actionTypes.CREATE_USER_SUCCESS})
       let res = await createNewUserSevice(data)
       if(res && res.errCode === 0){
+        toast.success(res.message)
         dispatch(saveUserSuccess(res.message))
+        dispatch(fetchAllUserStart())
       }else{
         dispatch(saveUserFail(res.errMessage))
       }
@@ -73,12 +76,126 @@ export const saveUserFail =(errMessage)=>({
   data: errMessage
 })
 
-export const resetCreateUserSuccess = () =>({
-  type: actionTypes.CREATE_USER_SUCCESS,
+export const fetchAllUserStart = ()=>{
+  return async(dispatch, getState)=>{
+    try {
+      // dispatch({type: actionTypes.CREATE_USER_SUCCESS})
+      let res = await getUsers('all')
+      if(res && res.errCode === 0){
+        dispatch(fetchAllUserSuccess(res.users.reverse()))
+      }else{
+        dispatch(fetchAllUserFail(res.errMessage))
+      }
+    } catch (e) {
+      dispatch(fetchAllUserFail(e.message))
+      console.log(e);
+    }
+  }
+}
+export const fetchAllUserSuccess =(data)=>({
+  type: actionTypes.FETCH_ALL_USER_SUCCESS,
+  data: data
+})
+export const fetchAllUserFail =(errMessage)=>({
+  type: actionTypes.FETCH_ALL_USER_FAIL,
+  data: errMessage
+})
+
+
+export const fetchUserStart = (id)=>{
+  return async(dispatch, getState)=>{
+    try {
+      // dispatch({type: actionTypes.CREATE_USER_SUCCESS})
+      let res = await getUsers(id)
+      if(res && res.errCode === 0){
+        dispatch(fetchUserSuccess(res.users))
+      }else{
+        dispatch(fetchUserFail(res.errMessage))
+      }
+    } catch (e) {
+      dispatch(fetchUserFail(e.message))
+      console.log(e);
+    }
+  }
+}
+export const fetchUserSuccess =(data)=>({
+  type: actionTypes.FETCH_USER_SUCCESS,
+  data: data
+})
+export const fetchUserFail =(errMessage)=>({
+  type: actionTypes.FETCH_USER_FAIL,
+  data: errMessage
+})
+
+export const deleteUserStart = (id)=>{
+  return async(dispatch, getState)=>{
+    try {
+      // dispatch({type: actionTypes.CREATE_USER_SUCCESS})
+      let res = await deleteUserSevice(id)
+      if(res && res.errCode === 0){
+        toast.success(res.message)
+        dispatch(deleteUserSuccess(res.message))
+        dispatch(fetchAllUserStart())
+      }else{
+        dispatch(deleteUserFail(res.errMessage))
+        toast.error(res.errMessage)
+      }
+    } catch (e) {
+      dispatch(deleteUserFail(e.message))
+      console.log(e);
+    }
+  }
+}
+export const deleteUserSuccess =(data)=>({
+  type: actionTypes.DELETE_USER_SUCCESS,
+  data: data
+})
+export const deleteUserFail =(errMessage)=>({
+  type: actionTypes.DELETE_USER_FAIL,
+  data: errMessage
+})
+
+
+export const updateUserStart = (data)=>{
+  return async(dispatch, getState)=>{
+    try {
+      let res = await updateUserSevice(data)
+      if(res && res.errCode === 0){
+        toast.success(res.message)
+        dispatch(updateUserSuccess(res.message))
+        dispatch(fetchAllUserStart())
+      }else{
+        toast.error(res.errMessage)
+        dispatch(updateUserFail(res.errMessage))
+      }
+    } catch (e) {
+      dispatch(updateUserFail(e.message))
+      console.log(e);
+    }
+  }
+}
+export const updateUserSuccess =(data)=>({
+  type: actionTypes.UPDATE_USER_SUCCESS,
+  data: data
+})
+export const updateUserFail =(errMessage)=>({
+  type: actionTypes.UPDATE_USER_FAIL,
+  data: errMessage
+})
+
+export const isEdit = (isEdit)=>({
+  type: actionTypes.IS_EDIT_USER,
+  data: isEdit
+})
+
+
+
+export const resetUserToastMessage = () =>({
+  type: actionTypes.RESET_MESSAGE,
   data: ''
 })
 
-export const resetCreateUserFail = () =>({
-  type: actionTypes.CREATE_USER_FAIL,
+export const resetUserToastMessageErr = () =>({
+  type: actionTypes.RESET_MESSAGE,
   data: ''
 })

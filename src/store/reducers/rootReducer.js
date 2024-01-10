@@ -31,7 +31,7 @@ const appPersistConfig = {
 const adminPersistConfig = {
     ...persistCommonConfig,
     key: 'admin',
-    whitelist: ['genders', 'positions', 'roles']
+    whitelist: ['genders', 'positions', 'roles', 'listUser']
 }
 export default (history) => combineReducers({
     router: connectRouter(history),

@@ -132,7 +132,12 @@
         "role": "Vai trò",
         "image": "Ảnh đại diện",
         "upload-file":"Tải ảnh",
-        "save":"Lưu user"
+        "save":"Lưu lại",
+        "save-changes":"Lưu thay đổi",
+        "edit":"Sửa",
+        "delete":"Xóa",
+        "confirmDelete":"Bạn có chắc chắn muốn xoá người dùng này ?",
+        "cancel":"Huỷ"
     },
     "system": {
         "user-manage": {

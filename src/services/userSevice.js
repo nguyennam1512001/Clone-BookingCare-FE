@@ -5,6 +5,8 @@ const handleLoginAPI =(email, password)=>{
 }
 
 const getUsers = (inputId)=>{
+    // inputId = "all" - lấy tất cả người dùng
+    // inputId = "1" - lấy người dùng có id là 1
     return axios.get(`/api/users?id=${inputId}`)
 }
 

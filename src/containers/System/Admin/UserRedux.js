@@ -6,9 +6,9 @@ import 'react-image-lightbox/style.css';
 import clsx from 'clsx'
 
 import { LANGUAGES } from '../../../utils/constant';
-import Toast from '../../../components/ToastMessage';
 import styleUserRedux from './UserRedux.module.scss'
 import * as actions from '../../../store/actions'
+import TableManageUser from './TableManageUser';
 
 
 
@@ -25,6 +25,7 @@ class UserRedux extends Component {
             photoIndex: 0,
             isOpen: false,
 
+            id:'',
             email:"",
             password:'',
             firstName:'',
@@ -44,9 +45,7 @@ class UserRedux extends Component {
                 phoneNumber: '',
                 address: '',
             },
-
-            // createUserFail: props.createUserFail,
-            // createUserSuccess: props.createUserSuccess,
+            isEdit: false,
         }
     }
 
@@ -76,17 +75,31 @@ class UserRedux extends Component {
             });
         }
 
-        if (prevProps.createUserFail !== this.props.createUserFail) {
-            this.setState({ createUserFail: this.props.createUserFail });
+        if (this.props.user && this.props.user !== prevProps.user) {
+            let { id, email, firstName, lastName, phoneNumber, address, gender, positionId, roleId,
+            } = this.props.user;
+        
+            this.setState({
+              id,
+              email,
+              firstName,
+              lastName,
+              phoneNumber,
+              address,
+              gender,
+              positionId,
+              roleId,
+            });
         }
-
-        if(prevProps.createUserSuccess !== this.props.createUserSuccess){
-            this.setState({ createUserSuccess: this.props.createUserSuccess });
+        if(prevProps.isEdit !== this.props.isEdit){
+            this.setState({ isEdit: this.props.isEdit })
+        }
+        if(prevProps.listUser !== this.props.listUser){
+            this.resetForm()
         }
         
     }
     
-
     handleOnchangeImage = (e)=>{
         let data = e.target.files
         let file = data[0]
@@ -110,10 +123,10 @@ class UserRedux extends Component {
 
     checkValidateInput =()=>{
         let isvalid = true
-        let arrCheck = ["email", 'password' ,'firstName' ,'lastName', 'phoneNumber', 'address']
+        let arrCheck = ["email", this.state.isEdit ? null : 'password','firstName' ,'lastName', 'phoneNumber', 'address']
         let errMessages = {...this.state.errMessages}
         for (let i = 0; i < arrCheck.length; i++) {
-            if (!this.state[arrCheck[i]]) {
+            if (arrCheck[i] !== null && !this.state[arrCheck[i]]) {
                 isvalid = false
                 errMessages[arrCheck[i]] = `This ${arrCheck[i]} field is required`;
             } else{
@@ -124,11 +137,23 @@ class UserRedux extends Component {
         return isvalid
     }
 
-    handleKeyDown = (key) => {
+    handleOnkey = (key) => {
         let errMessages = {...this.state.errMessages}
         errMessages[key] = ''
         this.setState({
             errMessages
+        })
+    };
+    resetErrMessage= () => {
+        this.setState({
+            errMessages: {
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                phoneNumber: '',
+                address: '',
+            },
         })
     };
     
@@ -148,22 +173,43 @@ class UserRedux extends Component {
             roleId: this.state.roleId,
         })
     }
+    handleUpdateUser = async ()=>{
+        let isvalid = this.checkValidateInput()
+        if(isvalid === false) return
+        await this.props.saveUpdateUser({
+            id: this.state.id,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            phoneNumber: this.state.phoneNumber,
+            address: this.state.address,
+            gender: this.state.gender,
+            positionId: this.state.positionId,
+            roleId: this.state.roleId,
+        })
+    }
 
-    showToast = (title, message, type, duration) => {
-        return (
-          <Toast
-            title= {title}
-            message={message}
-            type={type}
-            duration={duration}
-          />
-        );
-    };
+    resetForm =()=>{
+        this.setState({
+            id:'',
+            email:"",
+            password:'',
+            firstName:'',
+            lastName:'',
+            phoneNumber:'',
+            address:'',
+            gender:'',
+            positionId:'',
+            roleId:'',
+            avatar:'',
+        })
+    }
+
+
     // nam@gmail.com
 
     render() {
         let { previewImageUrl, email, password ,firstName ,lastName, 
-            phoneNumber, address  
+            phoneNumber, address, gender, positionId, roleId, isEdit
         } = this.state;
         let genders = this.state.genderArr
         let positions = this.state.positionArr
@@ -173,9 +219,6 @@ class UserRedux extends Component {
         return (
             <div className={clsx(styleUserRedux.user_redux_container)}>
                 <div className='title'>Manage products redux</div>
-                {this.props.createUserSuccess !== '' && this.showToast('Success', this.state.createUserSuccess, 'success', 3000)}
-                {this.props.createUserFail !=='' && this.showToast('Error', this.state.createUserFail, 'error', 3000)}
-
                 <div className={clsx(styleUserRedux.user_redux_body)}>
                     {isLoadingGender && <div className='loading_bar'></div>}
                     <div className='container'>
@@ -212,26 +255,29 @@ class UserRedux extends Component {
                                     <div className='col-12'>
                                         <label className='pt-3'><FormattedMessage id="manage-user.email"/></label>
                                         <input 
-                                            onKeyDown={() => this.handleKeyDown('email')}
+                                            disabled={isEdit ? true : false}
+                                            onKeyDown={() => this.handleOnkey('email')}
                                             value={email} 
                                             onChange={(e)=> this.onchangeInput(e, "email")} 
                                             className='form-control' type='email'
                                         />
                                         <span className='text-danger'>{this.state.errMessages.email}</span>
                                     </div>
-                                    <div className='col-12'>
-                                        <label className='pt-3'><FormattedMessage id="manage-user.password"/></label>
-                                        <input 
-                                            onKeyDown={() => this.handleKeyDown('password')}
-                                            value={password} 
-                                            onChange={(e)=> this.onchangeInput(e, "password")} 
-                                            className='form-control' type='password'/>
-                                        <span className='text-danger'>{this.state.errMessages.password}</span>
-                                    </div>
+                                    {!isEdit &&
+                                        <div className='col-12'>
+                                            <label className='pt-3'><FormattedMessage id="manage-user.password"/></label>
+                                            <input 
+                                                onKeyDown={() => this.handleOnkey('password')}
+                                                value={password} 
+                                                onChange={(e)=> this.onchangeInput(e, "password")} 
+                                                className='form-control' type='password'/>
+                                            <span className='text-danger'>{this.state.errMessages.password}</span>
+                                        </div>
+                                    }
                                     <div className='col-6'>
                                         <label className='pt-3'><FormattedMessage id="manage-user.firstName"/></label>
                                         <input 
-                                            onKeyDown={() => this.handleKeyDown('firstName')}
+                                            onKeyDown={() => this.handleOnkey('firstName')}
                                             value={firstName} 
                                             onChange={(e)=> this.onchangeInput(e, "firstName")} 
                                             className='form-control' type='text'/>
@@ -240,7 +286,7 @@ class UserRedux extends Component {
                                     <div className='col-6'>
                                         <label className='pt-3'><FormattedMessage id="manage-user.lastName"/></label>
                                         <input 
-                                            onKeyDown={() => this.handleKeyDown('lastName')}
+                                            onKeyDown={() => this.handleOnkey('lastName')}
                                             value={lastName} 
                                             onChange={(e)=> this.onchangeInput(e, "lastName")} 
                                             className='form-control' type='text'/>
@@ -249,7 +295,7 @@ class UserRedux extends Component {
                                     <div className='col-4'>
                                         <label className='pt-3'><FormattedMessage id="manage-user.mobile"/></label>
                                         <input 
-                                            onKeyDown={() => this.handleKeyDown('phoneNumber')}
+                                            onKeyDown={() => this.handleOnkey('phoneNumber')}
                                             value={phoneNumber} 
                                             onChange={(e)=> this.onchangeInput(e, "phoneNumber")} 
                                             className='form-control' type='text'/>
@@ -258,7 +304,7 @@ class UserRedux extends Component {
                                     <div className='col-8'>
                                         <label className='pt-3'><FormattedMessage id="manage-user.address"/></label>
                                         <input 
-                                            onKeyDown={() => this.handleKeyDown('address')}
+                                            onKeyDown={() => this.handleOnkey('address')}
                                             value={address} 
                                             onChange={(e)=> this.onchangeInput(e, "address")} 
                                             className='form-control' type='text'/>
@@ -268,6 +314,7 @@ class UserRedux extends Component {
                                         <label className='pt-3'><FormattedMessage id="manage-user.gender"/></label>
                                         <select className="form-select"
                                             onChange={(e)=> this.onchangeInput(e, "gender")}
+                                            value={gender}
                                         >
                                             {genders && genders.length > 0 && 
                                                 genders.map((item, index)=>{
@@ -282,6 +329,7 @@ class UserRedux extends Component {
                                         <label className='pt-3'><FormattedMessage id="manage-user.position"/></label>
                                         <select className="form-select"
                                             onChange={(e)=> this.onchangeInput(e, "positionId")}
+                                            value={positionId}
                                         >
                                             {positions && positions.length > 0 &&
                                                 positions.map((item, index)=>{
@@ -296,6 +344,7 @@ class UserRedux extends Component {
                                         <label className='pt-3'><FormattedMessage id="manage-user.role"/></label>
                                         <select className="form-select"
                                             onChange={(e)=> this.onchangeInput(e, "roleId")}
+                                            value={roleId}
                                         >
                                             {roles && roles.length > 0 &&
                                                 roles.map((item, index)=>{
@@ -307,19 +356,22 @@ class UserRedux extends Component {
                                         </select>
                                     </div>
                                 </div>
+                                <span className='text-danger'>{this.props.userToastMessageErr}</span>
                             </div>
                             <div className='col-12 d-flex flex-row-reverse'>
                                 <button 
-                                    onClick={()=> this.handleSaveUser()}
+                                    onClick={()=> isEdit ? this.handleUpdateUser() : this.handleSaveUser()}
                                     type='button' 
-                                    className='btn btn-primary btn-lg'
+                                    className={`btn ${isEdit ? 'btn-warning' : 'btn-primary'} btn-lg`}
                                 >
-                                    <FormattedMessage id="manage-user.save"/>
+                                    { isEdit ? <FormattedMessage id="manage-user.save-changes"/> : <FormattedMessage id="manage-user.save"/>}
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <TableManageUser resetErrMessage={this.resetErrMessage}/>
             </div>
         )
     }
@@ -327,7 +379,6 @@ class UserRedux extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state.admin.createUserFail);
     return {
         language: state.app.language,
         genderRedux: state.admin.genders,
@@ -336,6 +387,11 @@ const mapStateToProps = state => {
         isLoadingGender: state.admin.isLoadingGender,
         createUserSuccess: state.admin.createUserSuccess,
         createUserFail: state.admin.createUserFail,
+        userToastMessage: state.admin.userToastMessage,
+        userToastMessageErr: state.admin.userToastMessageErr,
+        user: state.admin.user,
+        isEdit: state.admin.isEdit,
+        listUser: state.admin.listUser,
     };
 };
 
@@ -345,6 +401,8 @@ const mapDispatchToProps = dispatch => {
         getPositionStart: () => dispatch(actions.fetchPositionStart()),
         getRoleStart: () => dispatch(actions.fetchRoleStart()),
         createNewUser: (data) => dispatch(actions.createNewUser(data)),
+        saveUpdateUser: (data) => dispatch(actions.updateUserStart(data)),
+        // changeIsEdit: (isEdit) => dispatch(actions.isEdit(isEdit))
     };
 };
 

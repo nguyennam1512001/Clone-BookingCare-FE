@@ -17,7 +17,8 @@ class Toast extends Component {
 
     this.autoRemoveId = setTimeout(() => {
       this.setVisible(false);
-      this.props.resetCreateUserFail()
+      this.props.resetUserToastMessage()
+      this.props.resetUserToastMessageErr()
     }, duration + 1000);
   }
 
@@ -32,7 +33,8 @@ class Toast extends Component {
   };
 
   handleClose = () => {
-    this.props.resetCreateUserFail()
+    this.props.resetUserToastMessage()
+    this.props.resetUserToastMessageErr()
     this.setVisible(false);
   };
 
@@ -72,14 +74,14 @@ class Toast extends Component {
 
 const mapStateToProps = state =>{
   return{
-    createUserSuccess: state.admin.createUserSuccess,
-    createUserFail: state.admin.createUserFail,
+    userToastMessage: state.admin.userToastMessage,
+    userToastMessageErr: state.admin.userToastMessageErr,
   }
 }
 const mapDispatchToProps = dispatch => {
   return{
-    resetCreateUserSuccess: () => dispatch(actions.resetCreateUserSuccess()),
-    resetCreateUserFail: () => dispatch(actions.resetCreateUserFail()),
+    resetUserToastMessage: () => dispatch(actions.resetUserToastMessage()),
+    resetUserToastMessageErr: () => dispatch(actions.resetUserToastMessageErr()),
   }
 }
 

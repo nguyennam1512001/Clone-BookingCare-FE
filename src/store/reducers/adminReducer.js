@@ -5,8 +5,11 @@ const initialState = {
     genders: [],
     positions: [],
     roles: [],
-    createUserSuccess: '',
-    createUserFail: '',
+    listUser: [],
+    userToastMessage:'',
+    userToastMessageErr: '',
+    user:[],
+    isEdit: false,
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -26,7 +29,9 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoadingGender: false
-            };
+            }
+        ;
+        
         case actionTypes.FETCH_POSITION_SUCCESS:
             return {
                 ...state,
@@ -35,7 +40,9 @@ const adminReducer = (state = initialState, action) => {
         case actionTypes.FETCH_POSITION_FAIL:
             return {
                 ...state,
-            };
+            }
+        ;
+
         case actionTypes.FETCH_ROLE_SUCCESS:
             return {
                 ...state,
@@ -44,17 +51,85 @@ const adminReducer = (state = initialState, action) => {
         case actionTypes.FETCH_ROLE_FAIL:
             return {
                 ...state,
-            };
+            }
+        ;
+
         case actionTypes.CREATE_USER_SUCCESS:
             return {
                 ...state,
-                createUserSuccess: action.data
+                userToastMessage: action.data
             };
         case actionTypes.CREATE_USER_FAIL:
             return {
                 ...state,
-                createUserFail: action.data
+                userToastMessageErr: action.data
+            }
+        ;
+
+        case actionTypes.FETCH_ALL_USER_SUCCESS:
+            return {
+                ...state,
+                listUser: action.data,
             };
+        case actionTypes.FETCH_ALL_USER_FAIL:
+            state.listUser = []
+            return {
+                ...state,
+                userToastMessageErr: action.data
+            }
+        ;
+
+        case actionTypes.FETCH_USER_SUCCESS:
+            return {
+                ...state,
+                user: action.data,
+            };
+        case actionTypes.FETCH_USER_FAIL:
+            state.user = []
+            return {
+                ...state,
+                userToastMessageErr: action.data
+            }
+        ;
+
+        case actionTypes.DELETE_USER_SUCCESS:
+            return {
+                ...state,
+                userToastMessage: action.data
+            };
+        case actionTypes.DELETE_USER_FAIL:
+            return {
+                ...state,
+                userToastMessageErr: action.data
+            }
+        ;
+
+        case actionTypes.UPDATE_USER_SUCCESS:
+            return {
+                ...state,
+                isEdit: false,
+                userToastMessage: action.data
+            };
+        case actionTypes.UPDATE_USER_FAIL:
+            return {
+                ...state,
+                isEdit: false,
+                userToastMessageErr: action.data
+            }
+        ;
+        case actionTypes.IS_EDIT_USER:
+            return {
+                ...state,
+                isEdit: action.data
+            }
+        ;
+        
+        case actionTypes.RESET_MESSAGE:
+            return{
+                ...state,
+                userToastMessage: action.data,
+                userToastMessageErr: action.data
+            }
         default:
             return state;
     }
