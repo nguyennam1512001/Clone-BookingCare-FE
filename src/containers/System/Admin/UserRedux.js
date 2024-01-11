@@ -9,6 +9,7 @@ import { LANGUAGES } from '../../../utils/constant';
 import styleUserRedux from './UserRedux.module.scss'
 import * as actions from '../../../store/actions'
 import TableManageUser from './TableManageUser';
+import { CommonUtils } from '../../../utils';
 
 
 
@@ -59,7 +60,9 @@ class UserRedux extends Component {
         if (
             prevProps.genderRedux !== this.props.genderRedux ||
             prevProps.positionRedux !== this.props.positionRedux ||
-            prevProps.roleRedux !== this.props.roleRedux
+            prevProps.roleRedux !== this.props.roleRedux ||
+            prevProps.isEdit !== this.props.isEdit || 
+            prevProps.listUser !== this.props.listUser
         ) {
             let genderRedux= this.props.genderRedux
             let positionRedux =this.props.positionRedux
@@ -76,9 +79,14 @@ class UserRedux extends Component {
         }
 
         if (this.props.user && this.props.user !== prevProps.user) {
-            let { id, email, firstName, lastName, phoneNumber, address, gender, positionId, roleId,
+            let { id, email, firstName, lastName, phoneNumber, address, gender, positionId, roleId, image
             } = this.props.user;
-        
+            let imageBase64 = ''
+            if(image){
+                imageBase64 = new Buffer.from(image, 'base64').toString('latin1') // convert file to base64
+                console.log(imageBase64);
+            }
+
             this.setState({
               id,
               email,
@@ -89,6 +97,7 @@ class UserRedux extends Component {
               gender,
               positionId,
               roleId,
+              previewImageUrl: imageBase64,
             });
         }
         if(prevProps.isEdit !== this.props.isEdit){
@@ -100,14 +109,15 @@ class UserRedux extends Component {
         
     }
     
-    handleOnchangeImage = (e)=>{
+    handleOnchangeImage = async (e)=>{
         let data = e.target.files
         let file = data[0]
         if (file) {
+            let base64 = await CommonUtils.getBase64(file) // convert file to base64
             let objectUrl = URL.createObjectURL(file)
             this.setState({
                 previewImageUrl: objectUrl,
-                avatar: file
+                avatar: base64
             })
         }
     }
@@ -171,6 +181,7 @@ class UserRedux extends Component {
             gender: this.state.gender,
             positionId: this.state.positionId,
             roleId: this.state.roleId,
+            avatar: this.state.avatar
         })
     }
     handleUpdateUser = async ()=>{
@@ -185,6 +196,7 @@ class UserRedux extends Component {
             gender: this.state.gender,
             positionId: this.state.positionId,
             roleId: this.state.roleId,
+            avatar: this.state.avatar,
         })
     }
 
@@ -197,15 +209,13 @@ class UserRedux extends Component {
             lastName:'',
             phoneNumber:'',
             address:'',
-            gender:'',
-            positionId:'',
-            roleId:'',
             avatar:'',
+            previewImageUrl:''
         })
     }
 
 
-    // nam@gmail.com
+
 
     render() {
         let { previewImageUrl, email, password ,firstName ,lastName, 
@@ -216,6 +226,7 @@ class UserRedux extends Component {
         let roles = this.state.roleArr
         let language = this.props.language
         let isLoadingGender = this.props.isLoadingGender
+
         return (
             <div className={clsx(styleUserRedux.user_redux_container)}>
                 <div className='title'>Manage products redux</div>
