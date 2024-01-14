@@ -27,14 +27,16 @@ class HomePage extends Component {
             infinite: true,
             speed: 500,
             slidesToShow: 3,
-            slidesToScroll: 3
+            slidesToScroll: 3,
+            infinite: false,
         };
         let setting4 = {
             dots: false,
             infinite: true,
             speed: 500,
             slidesToShow: 4,
-            slidesToScroll: 4
+            slidesToScroll: 4,
+            infinite: false,
         };
         return (
             <div>
@@ -61,5 +63,6 @@ const mapDispatchToProps = dispatch => {
     return {
     };
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
