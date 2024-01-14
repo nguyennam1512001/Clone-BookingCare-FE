@@ -76,7 +76,7 @@ class HandBook extends Component{
                                     <img src="https://cdn.bookingcare.vn/fo/w750/2019/07/31/085056logobenhvien108.jpg"/>
                                 </div>
                                 <div className={clsx(styles.wrap_title)}>
-                                    <div className={clsx(styles.title, styleHandBook.title)}><FormattedMessage id="handBook.description5"/></div>
+                                    <div className={clsx(styles.title, styleHandBook.title)}></div>
                                 </div>
                             </a>
                         </div>
@@ -86,7 +86,7 @@ class HandBook extends Component{
                                     <img src="https://cdn.bookingcare.vn/fo/w750/2023/05/16/153236-logo-hung-viet.jpg"/>
                                 </div>
                                 <div className={clsx(styles.wrap_title)}>
-                                    <div className={clsx(styles.title, styleHandBook.title)}><FormattedMessage id="handBook.description6"/></div>
+                                    <div className={clsx(styles.title, styleHandBook.title)}></div>
                                 </div>
                             </a>
                         </div>
@@ -96,7 +96,7 @@ class HandBook extends Component{
                                     <img src="https://cdn.bookingcare.vn/fo/w750/2022/08/29/104922-logo-med-tai-ha-noi--01.png"/>
                                 </div>
                                 <div className={clsx(styles.wrap_title)}>
-                                    <div className={clsx(styles.title, styleHandBook.title)}><FormattedMessage id="handBook.description7"/></div>
+                                    <div className={clsx(styles.title, styleHandBook.title)}></div>
                                 </div>
                             </a>
                         </div>

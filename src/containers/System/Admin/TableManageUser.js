@@ -104,7 +104,7 @@ class TableManageUser extends Component {
                                 listUser.map((item,index)=>(
                                 <tr key={index}>
                                     <th scope="row">{item.id}</th>
-                                    <th scope="row">{item.gender}</th>
+                                    <th scope="row">{this.props.language === LANGUAGES.VI? item.genderData.valueVi : item.genderData.valueEn}</th>
                                     <th scope="row">{item.email}</th>
                                     <th scope="row">{item.firstName}</th>
                                     <th scope="row">{item.lastName}</th>

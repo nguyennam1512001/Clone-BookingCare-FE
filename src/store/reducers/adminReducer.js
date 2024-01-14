@@ -57,7 +57,8 @@ const adminReducer = (state = initialState, action) => {
         case actionTypes.CREATE_USER_SUCCESS:
             return {
                 ...state,
-                userToastMessage: action.data
+                userToastMessage: action.data,
+                userToastMessageErr: ''
             };
         case actionTypes.CREATE_USER_FAIL:
             return {
@@ -70,6 +71,7 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 listUser: action.data,
+                userToastMessageErr: ''
             };
         case actionTypes.FETCH_ALL_USER_FAIL:
             state.listUser = []
@@ -83,6 +85,7 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: action.data,
+                userToastMessageErr: ''
             };
         case actionTypes.FETCH_USER_FAIL:
             state.user = []
@@ -95,7 +98,8 @@ const adminReducer = (state = initialState, action) => {
         case actionTypes.DELETE_USER_SUCCESS:
             return {
                 ...state,
-                userToastMessage: action.data
+                userToastMessage: action.data,
+                userToastMessageErr: ''
             };
         case actionTypes.DELETE_USER_FAIL:
             return {
@@ -108,7 +112,8 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isEdit: false,
-                userToastMessage: action.data
+                userToastMessage: action.data,
+                userToastMessageErr: ''
             };
         case actionTypes.UPDATE_USER_FAIL:
             return {

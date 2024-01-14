@@ -41,6 +41,10 @@ const actionTypes = Object.freeze({
 
     IS_EDIT_USER: "IS_EDIT_USER",
 
+    // doctor
+    FETCH_DOCTOR_SUCCESS: "FETCH_DOCTOR_SUCCESS",
+    FETCH_DOCTOR_FAIL: "FETCH_DOCTOR_FAIL",
+
     RESET_MESSAGE:"RESET_MESSAGE",
 })
 

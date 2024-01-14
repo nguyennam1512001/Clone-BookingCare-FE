@@ -22,7 +22,7 @@ class About extends Component{
                 <div className={clsx(styleAbout.about_title)}><FormattedMessage id="about.title"/></div>
                 <div className={clsx(styleAbout.about_body)}>
                     <div className={clsx(styleAbout.about_video)}>
-                        <iframe  src="https://www.youtube.com/embed/f2tZAqb4j8U" title="Nguyện Yêu - Hương Ly「Cukak Remix」/ Audio Lyrics Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe  src="https://www.youtube.com/embed/f2tZAqb4j8U" title="Nguyện Yêu - Hương Ly「Cukak Remix」/ Audio Lyrics Video" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                     </div>
                     <div className={clsx(styleAbout.about_media)}></div>
                 </div>

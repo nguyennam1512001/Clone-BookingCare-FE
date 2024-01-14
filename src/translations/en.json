@@ -42,15 +42,7 @@
         "MEDLATEC":"MEDLATEC medical system"
     },
     "outstandingDoctor":{
-        "title":"Outstanding Doctor",
-        "doctor1":"Associate Professor, Doctor, Senior Doctor Nguyen Duy Hung",
-        "supDoctor1":"Dermatology",
-        "doctor2":"Specialist II Doctor Tran Minh Khuyen",
-        "supDoctor2":"Mental health, Counseling, Psychotherapy",
-        "doctor3":"Specialist Doctor I Nguyen Trong Tuan",
-        "supDoctor3":"Mental health",
-        "doctor4":"Master Doctor Nguyen Thi Phu",
-        "supDoctor4":"Mental health"
+        "title":"Outstanding Doctor"
     },
     "handBook":{
         "handBook": "Handbook",
