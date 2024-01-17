@@ -16,16 +16,13 @@ class OutstandingDoctor extends Component {
         super(props)
         this.state = {
             limit: 20,
-            pageSize: 1,
+            pageNumber: 1,
             listDoctor: [],
         }
     }
 
     componentDidMount(){
-        this.props.fetchDoctorStart({
-            limit: this.state.limit,
-            pageSize: this.state.pageSize
-        })
+        this.props.fetchDoctorStart({limit: this.state.limit, pageNumber:this.state.pageNumber})
     }
 
     componentDidUpdate(prevProps, prevState, snapshot){
@@ -33,9 +30,11 @@ class OutstandingDoctor extends Component {
             this.setState({
                 listDoctor: this.props.listDoctor
             })
+        }
+        if(prevState.limit !== this.state.limit || prevState.pageNumber !== this.state.pageNumber){
             this.props.fetchDoctorStart({
                 limit: this.state.limit,
-                pageSize: this.state.pageSize
+                pageNumber: this.state.pageNumber
             })
         }
     }

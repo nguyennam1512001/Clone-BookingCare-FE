@@ -66,7 +66,7 @@ class ModalCreateUser extends Component {
         if(isValid){
             delete this.state.errMessage;
             let res = await this.props.createNewUser(this.state)
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 this.toggle();
             }else{
                 this.setState({

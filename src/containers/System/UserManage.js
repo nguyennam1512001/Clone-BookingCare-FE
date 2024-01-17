@@ -34,7 +34,7 @@ class UserManage extends Component {
 
     getAllUserFromReact= async()=>{
         let res = await getUsers('all')
-        if(res && res.errCode == 0){
+        if(res && res.errCode === 0){
             this.setState({
                 arrUser: res.users,
             })
@@ -130,11 +130,11 @@ class UserManage extends Component {
         try {
             if (id) {
                 let res = await deleteUserSevice(id)
-                let title = res && res.errCode == 0 ? 'Success' : 'Error'
-                let type = res && res.errCode == 0 ? 'success' : 'error'
+                let title = res && res.errCode === 0 ? 'Success' : 'Error'
+                let type = res && res.errCode === 0 ? 'success' : 'error'
                 this.showToast(res.message || res.errMessage, title, type)
 
-                if (res && res.errCode == 0) {
+                if (res && res.errCode === 0) {
                     await this.getAllUserFromReact()  
                 } 
                 return res

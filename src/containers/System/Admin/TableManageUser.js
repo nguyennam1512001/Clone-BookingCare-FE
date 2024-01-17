@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import clsx from 'clsx'
+// import clsx from 'clsx'
 
 import { ConfirmDialog } from 'primereact/confirmdialog';
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import 'primeicons/primeicons.css';
         
 import { LANGUAGES } from '../../../utils/constant';
-import styleTableManageUser from './TableMangeUser.scss'
+// import styleTableManageUser from './TableMangeUser.scss'
 import * as actions from '../../../store/actions'
 
 import MarkdownIt from 'markdown-it';

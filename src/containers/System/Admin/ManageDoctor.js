@@ -20,12 +20,6 @@ const mdParser = new MarkdownIt(/* Markdown-it options */);
 // Finish!
 
 
-
-const options = [
-  { value: 'chocolate', label: 'Chocolate' },
-  { value: 'strawberry', label: 'Strawberry' },
-  { value: 'vanilla', label: 'Vanilla' },
-];
 class ManageDoctor extends Component {
 
     constructor(props){
@@ -34,23 +28,42 @@ class ManageDoctor extends Component {
             contentMarkdown: '',
             contentHTML:'',
             selectedOption: '',
-            description:''
+            description:'',
+            listAllDoctor:'',
+            dataSelect:'',
+            doctorId:''
         }
     }
 
     async componentDidMount() {
-        this.props.fetchAllUser()
+        this.props.fetchAllDoctor()
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.listUser !== this.props.listUser){
+        if( prevProps.listAllDoctor !== this.props.listAllDoctor || 
+            prevProps.language !== this.props.language ){
+            let dataSelect = this.buildDataInputSelect(this.props.listAllDoctor)
             this.setState({
-                listUser: this.props.listUser
+                listAllDoctor: this.props.listAllDoctor,
+                dataSelect: dataSelect,
             })
         }
-        
     }
-
+    buildDataInputSelect = (data)=>{
+        let result = [];
+        let language= this.props.language
+        if(data && data.length > 0){
+            data.map((item, index)=>{
+                let object = {}
+                let labelVi = `${item.lastName} ${item.firstName}`
+                let labelEn = `${item.firstName} ${item.lastName}`
+                object.label = language === LANGUAGES.VI? labelVi: labelEn
+                object.value = item.id
+                result.push(object)
+            })
+        }
+        return result
+    }
     handleChange = (selectedOption) => {
         this.setState({ selectedOption }, () =>
           console.log(`Option selected:`, this.state.selectedOption)
@@ -65,7 +78,12 @@ class ManageDoctor extends Component {
     }
 
     handleSaveContentMarkdown=()=>{
-        console.log(this.state);
+        this.props.saveInforDoctor({
+            contentMarkdown: this.state.contentMarkdown,
+            contentHTML: this.state.contentHTML,
+            description: this.state.description,
+            doctorId: this.state.selectedOption.value,
+        })
     }
 
     handleChangeDesc =(e)=>{
@@ -75,7 +93,7 @@ class ManageDoctor extends Component {
     }
 
     render() {
-        let {listUser, visible} = this.state
+        let {} = this.state
         return (
             <div className={clsx(style.manage_doctor_container)}>
                 <div className='container'>
@@ -88,7 +106,7 @@ class ManageDoctor extends Component {
                             <Select
                                 value={this.state.selectedOption}
                                 onChange={ this.handleChange}
-                                options={options}
+                                options={this.state.dataSelect}
                                 placeholder='Select doctor'
                             />
                         </div>
@@ -124,17 +142,14 @@ class ManageDoctor extends Component {
 const mapStateToProps = state => {
     return {
         language: state.app.language,
-        listUser: state.admin.listUser,
+        listAllDoctor: state.doctor.listAllDoctor,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAllUser: () => dispatch(actions.fetchAllUserStart()),
-        fetchUser: (id)=> dispatch(actions.fetchUserStart(id)),
-        deleteUser: (id) => dispatch(actions.deleteUserStart(id)),
-        changeIsEdit: (isEdit) => dispatch(actions.isEdit(isEdit)),
-        setContentOfConfirmModal: (data) => dispatch(actions.setContentOfConfirmModal(data))
+        fetchAllDoctor: () => dispatch(actions.fetchAllDoctorStart()),
+        saveInforDoctor: (data) => dispatch(actions.saveInforDoctorStart(data)),
     };
 };
 

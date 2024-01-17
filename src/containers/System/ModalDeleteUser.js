@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { emitter } from '../../utils/Emitter'
 
 class ModalDeleteUser extends Component {
     constructor(props){
@@ -46,7 +45,7 @@ class ModalDeleteUser extends Component {
                     Delete the user
                 </ModalHeader>
                 <ModalBody>
-                    Do you want to delete the user ?
+                    <FormattedMessage id={'manage-user.confirmDelete'}/>
                 </ModalBody>
                 <ModalFooter>
                     <Button color="danger" className='px-3' onClick={this.deleteUserModal}>Delete</Button> 
@@ -60,6 +59,7 @@ class ModalDeleteUser extends Component {
 
 const mapStateToProps = state => {
     return {
+        language: state.app.language
     };
 };
 
