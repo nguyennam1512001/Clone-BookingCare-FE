@@ -11,6 +11,21 @@ import { LANGUAGES } from '../../../utils/constant';
 import styleTableManageUser from './TableMangeUser.scss'
 import * as actions from '../../../store/actions'
 
+import MarkdownIt from 'markdown-it';
+import MdEditor from 'react-markdown-editor-lite';
+// import style manually
+import 'react-markdown-editor-lite/lib/index.css';
+
+// Register plugins if required
+// MdEditor.use(YOUR_PLUGINS_HERE);
+
+// Initialize a markdown parser
+const mdParser = new MarkdownIt(/* Markdown-it options */);
+
+// Finish!
+function handleEditorChange({ html, text }) {
+  console.log('handleEditorChange', html, text);
+}
 
 
 
@@ -71,54 +86,57 @@ class TableManageUser extends Component {
     render() {
         let {listUser, visible} = this.state
         return (
-        <div className='container my-5'>
-            <ConfirmDialog
-                visible={visible}
-                onHide={() => this.setState({ visible: false })}
-                message={<FormattedMessage id={'manage-user.confirmDelete'}/>}
-                header="Confirmation"
-                icon="pi pi-exclamation-triangle"
-                position='top'
-                acceptLabel={<FormattedMessage id={'manage-user.delete'}/>}
-                rejectLabel={<FormattedMessage id={'manage-user.cancel'}/>}
-                accept={this.handleConfirmDelete}
-                reject={this.handleRejectDelete}
-            />
-            <div className='row'>
-                <div className='col-12'>
-                    <table className="table table-striped table-bordered table-hover">
-                        <thead className="bg-success bg-gradient">
-                            <tr>
-                            <th scope="col">id</th>
-                            <th scope="col"><FormattedMessage id="manage-user.gender"/></th>
-                            <th scope="col"><FormattedMessage id="manage-user.email"/></th>
-                            <th scope="col"><FormattedMessage id="manage-user.firstName"/></th>
-                            <th scope="col"><FormattedMessage id="manage-user.lastName"/></th>
-                            <th scope="col"><FormattedMessage id="manage-user.mobile"/></th>
-                            <th scope="col"><FormattedMessage id="manage-user.address"/></th>
-                            <th scope="col" colSpan="2"><FormattedMessage id="manage-user.edit"/></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {listUser && listUser.length>0 &&
-                                listUser.map((item,index)=>(
-                                <tr key={index}>
-                                    <th scope="row">{item.id}</th>
-                                    <th scope="row">{this.props.language === LANGUAGES.VI? item.genderData.valueVi : item.genderData.valueEn}</th>
-                                    <th scope="row">{item.email}</th>
-                                    <th scope="row">{item.firstName}</th>
-                                    <th scope="row">{item.lastName}</th>
-                                    <th scope="row">{item.phoneNumber}</th>
-                                    <th scope="row">{item.address}</th>
-                                    <th scope="row" title='Delete'><button onClick={()=>this.showConfirmation(item.id)} className='btn py-0 px-0'><i className='material-icons text-danger'>delete</i></button></th>
-                                    <th scope="row" title='Edit'><button onClick={()=>this.handleEditUser(item.id)} className='btn py-0 px-0'><i className='material-icons text-warning'>edit</i></button></th>
+            <>
+            <div className='container my-5'>
+                <ConfirmDialog
+                    visible={visible}
+                    onHide={() => this.setState({ visible: false })}
+                    message={<FormattedMessage id={'manage-user.confirmDelete'}/>}
+                    header="Confirmation"
+                    icon="pi pi-exclamation-triangle"
+                    position='top'
+                    acceptLabel={<FormattedMessage id={'manage-user.delete'}/>}
+                    rejectLabel={<FormattedMessage id={'manage-user.cancel'}/>}
+                    accept={this.handleConfirmDelete}
+                    reject={this.handleRejectDelete}
+                />
+                <div className='row'>
+                    <div className='col-12'>
+                        <table className="table table-striped table-bordered table-hover">
+                            <thead className="bg-success bg-gradient">
+                                <tr>
+                                <th scope="col">id</th>
+                                <th scope="col"><FormattedMessage id="manage-user.gender"/></th>
+                                <th scope="col"><FormattedMessage id="manage-user.email"/></th>
+                                <th scope="col"><FormattedMessage id="manage-user.firstName"/></th>
+                                <th scope="col"><FormattedMessage id="manage-user.lastName"/></th>
+                                <th scope="col"><FormattedMessage id="manage-user.mobile"/></th>
+                                <th scope="col"><FormattedMessage id="manage-user.address"/></th>
+                                <th scope="col" colSpan="2"><FormattedMessage id="manage-user.edit"/></th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {listUser && listUser.length>0 &&
+                                    listUser.map((item,index)=>(
+                                    <tr key={index}>
+                                        <th scope="row">{item.id}</th>
+                                        <th scope="row">{this.props.language === LANGUAGES.VI? item.genderData.valueVi : item.genderData.valueEn}</th>
+                                        <th scope="row">{item.email}</th>
+                                        <th scope="row">{item.firstName}</th>
+                                        <th scope="row">{item.lastName}</th>
+                                        <th scope="row">{item.phoneNumber}</th>
+                                        <th scope="row">{item.address}</th>
+                                        <th scope="row" title='Delete'><button onClick={()=>this.showConfirmation(item.id)} className='btn py-0 px-0'><i className='material-icons text-danger'>delete</i></button></th>
+                                        <th scope="row" title='Edit'><button onClick={()=>this.handleEditUser(item.id)} className='btn py-0 px-0'><i className='material-icons text-warning'>edit</i></button></th>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
+            <MdEditor style={{ height: '500px' }} renderHTML={text => mdParser.render(text)} onChange={handleEditorChange} />
+            </>
         )
     }
 
