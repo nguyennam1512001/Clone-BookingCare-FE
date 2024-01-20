@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { FormattedMessage } from "react-intl";
 import Slider from 'react-slick'
 import clsx from 'clsx'
+import { withRouter } from "react-router";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -38,9 +39,10 @@ class OutstandingDoctor extends Component {
             })
         }
     }
-
-
-
+    handleViewDetailDoctor = (doctor)=>{
+        this.props.history.push(`/detail-doctor/${doctor.id}`)
+    }
+    
     render(){
         let {listDoctor} = this.state
         return(
@@ -50,14 +52,15 @@ class OutstandingDoctor extends Component {
                         <span className={clsx(styles.section_title)}><FormattedMessage id="outstandingDoctor.title"/></span>
                         <button className={clsx(styles.btn)}><FormattedMessage id="common.see-more"/></button>
                     </div>
-                    <Slider {...this.props.settings}>
+                    
+                    <Slider {...this.props.settings} >
                         {listDoctor && listDoctor.length > 0 &&
                             listDoctor.map((item, index) => {
                                 let nameVi = item.positionData.valueVi+" "+item.lastName+" "+item.firstName
                                 let nameEn = item.positionData.valueEn+" "+item.firstName+" "+item.lastName
                                 return(
-                                    <div key={index} className={clsx(styleOutstandingDoctor.item)}>
-                                        <a href="#" className={clsx(styleOutstandingDoctor.item_link)}>
+                                    <div key={index} className={clsx(styleOutstandingDoctor.item, "slide")} onClick={()=>this.handleViewDetailDoctor(item)}>
+                                        <div className={clsx(styleOutstandingDoctor.item_link)}>
                                             <div className={clsx(styleOutstandingDoctor.wrap_img)}>
                                                 {item.image && (
                                                     <img src={Buffer.from(item.image, 'base64').toString('latin1')} alt="Doctor"/>
@@ -67,12 +70,11 @@ class OutstandingDoctor extends Component {
                                                 <div className={clsx(styleOutstandingDoctor.title)}>{this.props.language === LANGUAGES.EN ? nameEn : nameVi}</div>
                                                 <div className={clsx(styleOutstandingDoctor.sup_title)}></div>
                                             </div>
-                                        </a>
+                                        </div>
                                     </div>
                                 )
                             }
                         )}
-                        
                     </Slider>
                 </div>
             </div>  
@@ -94,4 +96,4 @@ const mapDispatchToProps = dispatch =>{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(OutstandingDoctor)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OutstandingDoctor))

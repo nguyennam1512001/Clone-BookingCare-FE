@@ -31,7 +31,8 @@ class ManageDoctor extends Component {
             description:'',
             listAllDoctor:'',
             dataSelect:'',
-            doctorId:''
+            doctorId:'',
+            reset: false,
         }
     }
 
@@ -48,12 +49,38 @@ class ManageDoctor extends Component {
                 dataSelect: dataSelect,
             })
         }
+
+        if (prevProps.inforDetailDoctor !== this.props.inforDetailDoctor) {
+            if ( !this.props.inforDetailDoctor || !this.props.inforDetailDoctor.Markdown ) {
+                this.setState({
+                    contentMarkdown: '',
+                    contentHTML: '',
+                    description: '',
+                });
+            } else {
+                this.setState({
+                    contentMarkdown: this.props.inforDetailDoctor.Markdown.contentMarkdown,
+                    contentHTML: this.props.inforDetailDoctor.Markdown.contentHTML,
+                    description: this.props.inforDetailDoctor.Markdown.description,
+                });
+             }
+        }
+        if(prevProps.listDetailDoctor !== this.props.listDetailDoctor){
+            this.setState({
+                contentMarkdown: '',
+                contentHTML: '',
+                description: '',
+                selectedOption: '',
+            });
+        }
     }
+
+    
     buildDataInputSelect = (data)=>{
         let result = [];
         let language= this.props.language
         if(data && data.length > 0){
-            data.map((item, index)=>{
+            data.map((item, index) => {
                 let object = {}
                 let labelVi = `${item.lastName} ${item.firstName}`
                 let labelEn = `${item.firstName} ${item.lastName}`
@@ -68,6 +95,7 @@ class ManageDoctor extends Component {
         this.setState({ selectedOption }, () =>
           console.log(`Option selected:`, this.state.selectedOption)
         );
+        this.props.fetchDetailDoctor(selectedOption.value)
     };
 
     handleEditorChange=({ html, text }) =>{
@@ -81,7 +109,16 @@ class ManageDoctor extends Component {
         this.props.saveInforDoctor({
             contentMarkdown: this.state.contentMarkdown,
             contentHTML: this.state.contentHTML,
-            description: this.state.description,
+            description: this.state.description.trim(),
+            doctorId: this.state.selectedOption.value,
+        })
+    }
+
+    handleUpdateContentMarkdown = ()=>{
+        this.props.updateDetailDoctor({
+            contentMarkdown: this.state.contentMarkdown,
+            contentHTML: this.state.contentHTML,
+            description: this.state.description.trim(),
             doctorId: this.state.selectedOption.value,
         })
     }
@@ -93,7 +130,7 @@ class ManageDoctor extends Component {
     }
 
     render() {
-        let {} = this.state
+        let {inforDetailDoctor} = this.props
         return (
             <div className={clsx(style.manage_doctor_container)}>
                 <div className='container'>
@@ -121,14 +158,22 @@ class ManageDoctor extends Component {
                             </textarea>
                         </div>
                         <div className='col-12'>
+                            <label className=''>Thêm thông tin chi tiết:</label>
                             <MdEditor 
                                 style={{ height: '500px' }} 
                                 renderHTML={text => mdParser.render(text)} 
-                                onChange={this.handleEditorChange} />
+                                onChange={this.handleEditorChange} 
+                                value={this.state.contentMarkdown}
+                            />
                         </div>
                         <div className='col-12 text-end'>
                             <button className='btn btn-primary me-5 mt-3'
-                                onClick={this.handleSaveContentMarkdown}
+                                onClick={ 
+                                    inforDetailDoctor && inforDetailDoctor.Markdown && (
+                                        inforDetailDoctor.Markdown.contentMarkdown || inforDetailDoctor.Markdown.description
+                                    )
+                                    ? this.handleUpdateContentMarkdown
+                                    : this.handleSaveContentMarkdown }
                             >Save</button>
                         </div>
                     </div>
@@ -143,6 +188,9 @@ const mapStateToProps = state => {
     return {
         language: state.app.language,
         listAllDoctor: state.doctor.listAllDoctor,
+        reset: state.doctor.reset,
+        inforDetailDoctor: state.doctor.inforDetailDoctor,
+        listDetailDoctor: state.doctor.listDetailDoctor,
     };
 };
 
@@ -150,6 +198,8 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchAllDoctor: () => dispatch(actions.fetchAllDoctorStart()),
         saveInforDoctor: (data) => dispatch(actions.saveInforDoctorStart(data)),
+        updateDetailDoctor: (data)=> dispatch(actions.updateDetailDoctorStart(data)),
+        fetchDetailDoctor: (id)=> dispatch(actions.fetchDetailDoctorStart(id)),
     };
 };
 

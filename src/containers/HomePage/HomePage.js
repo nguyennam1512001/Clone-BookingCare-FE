@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import HomeHeader from './HomeHeader';
+import HomeBanner from './HomeBanner';
 import Specialty from './Section/Specialty';
 import HealthFacility from './Section/HealthFacility';
 import OutstandingDoctor from './Section/OutstandingDoctor';
 import './HomePage.scss'
 import HandBook from './Section/HandBook';
 import About from './Section/About';
-import HomeFooter from './Section/HomeFooter';
 
 class HomePage extends Component {
     constructor(props){
@@ -19,7 +18,7 @@ class HomePage extends Component {
     }
     componentDidMount(){
 
-    }
+    }   
 
     render() {
         let settings = {
@@ -40,13 +39,13 @@ class HomePage extends Component {
         };
         return (
             <div>
-                <HomeHeader/>
+                <HomeBanner/>
                 <Specialty settings={settings}/>
                 <HealthFacility settings={settings}/>
-                <OutstandingDoctor settings = {setting4}/>
+                <OutstandingDoctor settings = {setting4} />
                 <HandBook settings={setting4}/>
                 <About/>
-                <HomeFooter/>
+
             </div>
         );
     }

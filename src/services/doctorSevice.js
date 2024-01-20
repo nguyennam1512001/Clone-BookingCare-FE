@@ -13,4 +13,15 @@ const saveInforDoctorSevice = (data)=>{
     return axios.post(`/api/save-infor-doctor`, data)
 }
 
-export {getDoctors, getAllDoctors, saveInforDoctorSevice}
+const getDetailDoctor =(id)=>{
+    return axios.get(`/api/get-detail-doctor-by-id?id=${id}`)
+}
+
+const getAllDetailDoctor = () =>{
+    return axios.get(`/api/get-all-detail-doctor`)
+}
+
+const updateDetailDoctor =(data)=>{
+    return axios.put(`/api/edit-detail-doctor-by-id`, data)
+}
+export {getDoctors, getAllDoctors, saveInforDoctorSevice, getDetailDoctor, updateDetailDoctor, getAllDetailDoctor}

@@ -3,8 +3,11 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     listDoctor: [],
     listAllDoctor: [],
+    inforDetailDoctor: [],
     doctorToastMessage: '',
-    doctorToastMessageErr: ''
+    doctorToastMessageErr: '',
+    reset: true,
+    listDetailDoctor: []
 }
 
 const doctorReducer = (state = initialState, action) => {
@@ -29,13 +32,46 @@ const doctorReducer = (state = initialState, action) => {
                 ...state,
                 listAllDoctor: []
             }
+        case actionTypes.FETCH_DETAIL_DOCTOR_SUCCESS: 
+            return {
+                ...state,
+                inforDetailDoctor: action.data
+            }
+        case actionTypes.FETCH_DETAIL_DOCTOR_FAIL: 
+            return {
+                ...state,
+                inforDetailDoctor: []
+            }
         case actionTypes.SAVE_INFOR_DOCTOR_SUCCESS: 
             return {
                 ...state,
-                doctorToastMessage: action.data,
-                doctorToastMessageErr: ''
+                reset: true
             }
-
+        case actionTypes.SAVE_INFOR_DOCTOR_FAIL: 
+            return {
+                ...state,
+                reset: false
+            }
+        case actionTypes.UPDATE_DETAIL_DOCTOR_SUCCESS: 
+            return {
+                ...state,
+                reset: true
+            }
+        case actionTypes.UPDATE_DETAIL_DOCTOR_FAIL: 
+            return {
+                ...state,
+                reset: false
+            }
+        case actionTypes.FETCH_ALL_DETAIL_DOCTOR_SUCCESS: 
+            return {
+                ...state,
+                listDetailDoctor: action.data
+            }
+        case actionTypes.FETCH_ALL_DETAIL_DOCTOR_FAIL: 
+            return {
+                ...state,
+                listDetailDoctor: []
+            }
         default:
             return state;
     }
